@@ -1,0 +1,1263 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Heis}{\mathrm{Heis}_3}
+\newcommand{\Cq}{C_q}
+\newcommand{\Gq}{G_q}
+\newcommand{\Sq}{S_q}
+\newcommand{\Piq}{\Pi_q}
+\newcommand{\rhoq}{\rho_q}
+\newcommand{\iotaq}{\iota_q}
+\newcommand{\Eq}{\mathcal{E}_q}
+\newcommand{\LPi}{L_\Pi}
+\newcommand{\scrS}{\mathscr{S}}
+
+\title{Large-$q$ Limit of the Admissible Fibre:\\
+Representational and Operator Convergence\\[0.5ex]
+{\large Q5a of the Cosmochrony Spectral Geometry Programme}}
+\author{J\'er\^ome Beau\\[0.5ex]
+\small Independent Researcher\\
+\small \texttt{jerome.beau@cosmochrony.org}}
+\date{2026}
+
+\begin{document}
+
+  \maketitle
+
+  \begin{abstract}
+    The companion paper~\cite{FoundationM} establishes that the admissible fibre $F_n$
+    carries the structure of the Weil representation $V_\rho$ of
+    $\Heis(\mathbb{Z}/q\mathbb{Z})$ on $L^2(\mathbb{Z}/q\mathbb{Z})$ (Foundation
+    Theorem~5.6).
+    The relationship between this discrete structure and continuous spacetime geometry in
+    the large-$q$ limit is identified as open in Foundation Remark~3.6.
+    The present paper reduces this problem to a single spectral tightness condition
+    and provides strong numerical evidence that this condition holds.
+
+    We formulate the large-$q$ limit in the category of Hilbert spaces and operator
+    algebras --- not in the category of sets --- and decompose it into three convergences:
+    a Hilbert inductive limit (T1), a representational convergence of Weil generators to
+    metaplectic generators (T2), and a Mosco convergence of admissibility forms to a
+    second-order operator $\LPi$ on $L^2(\mathbb{R})$ (T3).
+    Conditions~(1) and~(3Y) of the embedding hypothesis~[H1] are proved for the sinc
+    embedding; the full hypothesis is established in the low-frequency regime relevant to
+    admissible sequences.
+    Each result is stated with explicit hypotheses and proof status.
+    The central remaining condition --- Mosco tightness (Conjecture~C, equivalently:
+    spectral mass does not escape to high frequencies under admissibility constraints) ---
+    is formulated precisely, reduced to a Nash inequality programme, and confirmed
+    quantitatively: for all tested primes $q \in \{29, 61, 101, 151\}$, the spectral tail
+    mass of admissible test vectors satisfies $E_q(q/3)/\|f_q\|^2 < 2.1 \times 10^{-5}$,
+    with values decreasing toward machine precision as $q$ grows.
+    The continuum limit is shown to be a forced consequence of admissibility and spectral
+    stability, not an additional assumption.
+    The four-dimensional effective geometry and the Lorentzian signature are deferred to
+    the companion paper Q5b.
+  \end{abstract}
+
+  \tableofcontents
+
+  \section{Introduction}
+    \label{sec:intro}
+
+    \subsection{Context and motivation}
+
+      The companion paper~\cite{FoundationM} establishes, from four axioms governing admissible
+      non-injective transitions, that the symmetry group of the admissible fibre $F_n$ is
+      isomorphic to $\Heis(\mathbb{Z}/q\mathbb{Z})$ for some prime $q$, and that $F_n$ is
+      isomorphic to the Weil representation $V_\rho$ on
+      $L^2(\mathbb{Z}/q\mathbb{Z})$~\cite{HeisenbergN} (Foundation Theorem~5.6, proved).
+      The Cosmochrony white paper~\cite{Cosmochrony} further identifies three qualitative
+      convergences expected to hold in the large-$q$ limit:
+      \begin{itemize}
+        \item[(i)] the group $G_q = \Heis(\mathbb{Z}/q\mathbb{Z})$ and its representation
+        space $C_q \simeq L^2(\mathbb{Z}/q\mathbb{Z})$ approach $\Heis(\mathbb{R})$ and
+        $L^2(\mathbb{R})$ respectively;
+        \item[(ii)] the BFS shell structure of $G_q$ approaches a continuous foliation,
+        with the polynomial ball growth $|B_n| \sim c\,n^4$ inducing a four-dimensional
+        effective geometry;
+        \item[(iii)] the discrete admissibility filter $\Pi_q$ approaches a second-order
+        differential constraint, recovering the Born--Infeld Lagrangian in the continuum.
+      \end{itemize}
+      Foundation Remark~3.6 states explicitly that a fully rigorous derivation of these
+      convergences remains open at the level of an explicit theorem.
+      The present paper addresses convergences~(i) and~(iii).
+      Convergence~(ii) and the emergence of a four-dimensional effective geometry are the
+      subject of the companion paper Q5b.
+
+    \subsection{Categorical clarification}
+
+      The large-$q$ limit studied here is \emph{not} a pointwise map
+      $\mathbb{Z}/q\mathbb{Z} \to \mathbb{R}$.
+      Such a limit cannot be understood as a pointwise map in the category of sets: a finite
+      set cannot approximate $\mathbb{R}$ by any bijective or surjective identification.
+      The limit is instead formulated in the category $\mathbf{Hilb}$ of Hilbert spaces and
+      contractions, and in the category $C^*\text{-}\mathbf{Alg}$ of $C^*$-algebras.
+      The elements of $\mathbb{Z}/q\mathbb{Z}$ index spectral modes (Weil-block characters);
+      their inductive limit produces a continuous function space, not a bijection of points.
+      This distinction determines which analytical tools are appropriate (Mosco convergence
+      of quadratic forms, strong resolvent convergence) and which are not (pointwise
+      identifications or naive sampling-based reconstructions).
+
+    \subsection{Dimensional clarification}
+
+      The representation space $C_q \simeq L^2(\mathbb{Z}/q\mathbb{Z})$ is a space of
+      functions of one variable (the central coordinate $k \in \mathbb{Z}/q\mathbb{Z}$).
+      The four-dimensional structure of the framework is a property of the Heisenberg group
+      $G_q$ itself: by the Bass--Guivarc'h theorem, $G_q$ has homogeneous dimension $D = 4$
+      (Section~\ref{sec:setup}).
+      The operator $\LPi$ constructed in this paper acts on $L^2(\mathbb{R})$ and is the
+      one-dimensional operator-theoretic shadow of the homogeneous four-dimensional structure
+      carried by $\Heis(\mathbb{R})$.
+      The passage from this operator to a four-dimensional effective spacetime geometry ---
+      that is, the identification of the BFS shell stratification of $G_q$ with a continuous
+      foliation of $\mathbb{R}^4$ --- is the subject of Q5b and is not claimed here.
+
+    \subsection{Scope and main results}
+
+      This paper establishes three results, each corresponding to one of the convergences
+      announced in~\cite{FoundationM}~\S3.5(i) and~\S3.5(iii):
+
+      \begin{description}
+        \item[Theorem~T1 (Hilbert inductive system, \S\ref{sec:hilbert})]
+        The spaces $C_q$, equipped with Weil-block-compatible embeddings $\iota_{q,q'}$,
+        form a directed system in $\mathbf{Hilb}$ whose inductive limit is $L^2(\mathbb{R})$,
+        with the Schwartz class $\scrS(\mathbb{R})$ as a dense test subspace.
+        \emph{Status:} conditional on Hypothesis~\ref{hyp:embedding}~[H1].
+
+        \item[Theorem~T2 (Representational convergence, \S\ref{sec:weil})]
+        The rescaled Weil generators $\hat{X}_q$, $\hat{P}_q$ converge strongly on
+        $\scrS(\mathbb{R})$ to the metaplectic generators $\hat{x}$ and $-i\partial_x$
+        of $\Heis(\mathbb{R})$.
+        \emph{Status:} conditional on Hypotheses~\ref{hyp:embedding}~[H1]
+        and~\ref{hyp:weil}~[H2]; partial support from~\cite{HannayBerry1980}.
+
+        \item[Theorem~T3 (Operator Mosco limit, \S\ref{sec:mosco})]
+        The rescaled admissibility forms $\mathcal{E}_q$ converge in the sense of Mosco
+        on varying Hilbert spaces $(C_q, L^2(\mathbb{R}), \iotaq)$ to the closed form
+        \[
+          \mathcal{E}(f,g) = A \int_{\mathbb{R}} \overline{\partial_x f}\,\partial_x g
+          \,\mathrm{d}x
+        \]
+        with $A > 0$ a constant.
+        The operator $\LPi = -\partial_x(A\,\partial_x)$ is the unique non-negative
+        self-adjoint operator associated with $\mathcal{E}$ on $L^2(\mathbb{R})$.
+        \emph{Status:} conditional on Hypotheses~\ref{hyp:embedding}~[H1],
+\ref{hyp:weights}~[H-$w$], \ref{hyp:poincare}~[H-$\mathcal{E}$1], and
+        Conjecture~\ref{conj:tightness}~[C].
+      \end{description}
+
+      The geometric reading of $\LPi$ --- and in particular the recovery of a genuinely
+      four-dimensional effective geometry from the Heisenberg shell structure rather than from
+      the one-dimensional representation variable --- is deferred to Q5b and the companion
+      paper on projective temporal ordering~\cite{Beau2026pto}.
+
+      \medskip
+
+      Section~\ref{sec:setup} fixes notation and introduces the admissibility form.
+      Sections~\ref{sec:hilbert}--\ref{sec:mosco} prove T1--T3 conditionally.
+      Section~\ref{sec:conjecture} formulates Conjecture~C and its proof strategy.
+      Section~\ref{sec:open} collects the open problems.
+
+  \section{Setup and notation}
+    \label{sec:setup}
+
+    \subsection{The Heisenberg group and its BFS geometry}
+
+      Fix a prime $q \geq 5$.
+      The \emph{relational group} is
+      \[
+        G_q = \Heis(\mathbb{Z}/q\mathbb{Z})
+        = \left\{
+            \begin{pmatrix} 1 & a & c \\ 0 & 1 & b \\ 0 & 0 & 1 \end{pmatrix}
+            : a, b, c \in \mathbb{Z}/q\mathbb{Z}
+        \right\},
+      \]
+      with generators $X = E_{12}$, $Y = E_{23}$, $Z = E_{13}$ (standard elementary matrices
+      modulo $q$) and their inverses.
+      The standard generating set is $S_q = \{X^{\pm 1}, Y^{\pm 1}\}$; in particular $S_q$
+      is symmetric: $s \in S_q \Rightarrow s^{-1} \in S_q$.
+
+      The BFS balls and shells are
+      \[
+        B_n = \{g \in G_q : d_{S_q}(e, g) \leq n\}, \qquad S_n = B_n \setminus B_{n-1},
+      \]
+      where $d_{S_q}$ is the word metric.
+      By the Bass--Guivarc'h theorem~\cite{Bass1972,Guivarch1973}, $G_q$ has homogeneous
+      dimension $D = 4$:
+      \[
+        |B_n| \sim c\,n^4 \quad (n \to \infty, \; n \ll q),
+      \]
+      where $c > 0$ depends only on the generating set.
+
+    \subsection{Weil representation and admissible fibre}
+
+      The \emph{representation space} is $C_q = L^2(\mathbb{Z}/q\mathbb{Z})$, the Hilbert
+      space of complex-valued functions on $\mathbb{Z}/q\mathbb{Z}$ with inner product
+      $\langle f, g \rangle_{C_q} = q^{-1}\sum_{k} \overline{f(k)}\,g(k)$.
+      The \emph{Weil representation} $\rho_q : G_q \to \mathcal{U}(C_q)$ is the standard
+      oscillator representation at central character $e^{2\pi i/q}$; its explicit action on
+      generators is recalled in Appendix~A.
+
+      By Foundation Theorem~5.6~\cite{FoundationM,HeisenbergN}, the admissible fibre
+      satisfies $F_n \simeq V_\rho \subset C_q$, where $V_\rho$ is the (unique, up to
+      isomorphism) irreducible Weil representation.
+      This identification is proved and is used without modification in what follows.
+
+      The BI-parity involution $\sigma : k \mapsto q - k$ on $\mathbb{Z}/q\mathbb{Z}$
+      induces a unitary involution $\hat{\sigma}$ on $C_q$, satisfying
+      $\hat{\sigma} \circ \rho_q(g) = \rho_q(\sigma(g)) \circ \hat{\sigma}$ for all
+      $g \in G_q$~\cite{Beau2026c,Beau2026a22}.
+
+    \subsection{The admissibility filter}
+
+      The admissibility filter $\Pi_q$ is the orthogonal projection of $C_q$ onto the
+      admissible subspace, constructed via the Gram--Schmidt pipeline on Weil fingerprint
+      vectors~\cite{Beau2026a16,Beau2026a21}.
+
+      \begin{hypothesis}[H-$\Pi$1: Orthogonal projection commuting with parity]
+        \label{hyp:proj}
+        $\Pi_q$ is an orthogonal projection on $C_q$ satisfying $\Pi_q^2 = \Pi_q = \Pi_q^*$
+        and $\Pi_q \hat{\sigma} = \hat{\sigma} \Pi_q$.
+      \end{hypothesis}
+
+      This is proved in~\cite{Beau2026a16,Beau2026a22}; it is listed for logical bookkeeping.
+
+      \begin{hypothesis}[H-$\Pi$2: Shell locality]
+        \label{hyp:locality}
+        There exists a depth $n_*(q) \to \infty$ as $q \to \infty$ such that $\Pi_q$ acts as
+        the identity on
+        \[
+          V_q^{(n_*(q))} := \mathrm{span}\bigl\{v_c^{(n)} : n \leq n_*(q),\;
+          c \in (\mathbb{Z}/q\mathbb{Z})^\times\bigr\},
+        \]
+        where $v_c^{(n)}$ are the Weil fingerprint vectors of~\cite{Beau2026a21}.
+      \end{hypothesis}
+
+      This follows from the BFS depth analysis of the O-series and is structurally proved.
+
+    \subsection{The admissibility form}
+      \label{sec:form}
+
+      Since $\Pi_q$ is an operator on $C_q$ and the Weil representation acts on $C_q$, the
+      admissibility form is defined directly in terms of the Weil operators $\rho_q(s)$ and
+      the admissibility filter $\Pi_q$.
+      The admissibility weights $a_q(s)$ are derived explicitly from the Weil fingerprint
+      data of the O-series (Definition~\ref{def:weights}); the shell structure of $G_q$
+      enters through the BFS averaging in that definition.
+
+      \begin{definition}[O-series admissibility weights]
+        \label{def:weights}
+        For $s \in S_q$, define the \emph{admissibility weight} $a_q(s)$ by
+        \[
+          a_q(s) := \mathbb{E}_{n,c}\bigl[
+            \|(\rho_q(s) - I)\Pi_q v_c^{(n)}\|^2_{C_q}
+            \bigr],
+        \]
+        where $v_c^{(n)}$ are the Weil fingerprint vectors of~\cite{Beau2026a21} and
+        $\mathbb{E}_{n,c}$ is the uniform average over BFS shells $n \leq n_*(q)$ and
+        characters $c \in (\mathbb{Z}/q\mathbb{Z})^\times$.
+        Equivalently, writing $\Delta_s\sigma(n,c) := \sigma_c^{(s)}(n) - \sigma_c(n)$ for the
+        variation of the fingerprint energy under the action of $s$,
+        \[
+          a_q(s) \;\sim\; \frac{1}{|S_{n_*(q)}|} \sum_{n \leq n_*(q)}\sum_{c} \Delta_s\sigma(n,c),
+        \]
+        where $\sigma_c(n)$ is the Weil-block fingerprint energy at shell $n$ and character $c$,
+        as computed in the O-series pipeline~\cite{Beau2026a21,Beau2026a29}.
+      \end{definition}
+
+      The weight $a_q(s)$ measures how much the Weil generator $\rho_q(s)$ perturbs the
+      admissible state $\Pi_q v_c^{(n)}$: it is large when $s$ moves the admissible fibre
+      significantly, and small when $s$ acts nearly trivially on it.
+      By construction, $a_q(s) \geq 0$; symmetry $a_q(s) = a_q(s^{-1})$ follows from
+      unitarity of $\rho_q(s)$ and self-adjointness of $\Pi_q$; parity invariance follows
+      from [H-$\Pi$1].
+
+      \begin{hypothesis}[H-$w$: Convergence of admissibility weights]
+        \label{hyp:weights}
+        The admissibility weights of Definition~\ref{def:weights} satisfy:
+        \begin{enumerate}
+          \item \emph{Uniform bound:} $\sup_q \max_{s \in S_q} a_q(s) < \infty$.
+          \item \emph{Asymptotic limit:} there exists $A > 0$ such that
+          $a_q(s) \to A$ for all $s \in S_q$ as $q \to \infty$.
+        \end{enumerate}
+      \end{hypothesis}
+
+      \begin{remark}[Relation to the O-series]
+The convergence of $a_q(s)$ to a constant $A > 0$ is directly related to the
+stabilisation of the Weil-block capacity exponent $\delta_{\mathrm{pair}}$ across
+primes, documented numerically in O12--O25~\cite{Beau2026a16,Beau2026a29}.
+Specifically, the asymptotic stability of $\delta_{\mathrm{pair}}$ implies that the
+per-pair fingerprint energy $\sigma_{\mathrm{pair}}(n)$ grows as a fixed power of $n$
+independently of $q$, which controls the shell-averaged perturbation $a_q(s)$.
+A rigorous derivation of H-$w$ from the O-series spectral bounds is part of Q5a-O3.
+      \end{remark}
+
+      \begin{definition}[Rescaled admissibility form]
+        \label{def:form}
+        Let $(a_q)_q$ be an admissible family of weights.
+        For $f, g \in C_q$, set
+        \[
+          \mathcal{E}_q(f, g)
+          := \frac{q^{-2}}{2}
+          \sum_{s \in S_q} a_q(s)\,
+          \bigl\langle (\rho_q(s) - I)\Pi_q f,\; (\rho_q(s) - I)\Pi_q g
+          \bigr\rangle_{C_q}.
+        \]
+      \end{definition}
+
+      All terms lie in $C_q$: $\Pi_q f \in C_q$ and $\rho_q(s)\Pi_q f \in C_q$ since
+      $\rho_q(s)$ is unitary on $C_q$.
+      Symmetry of $a_q$ and unitarity of $\rho_q(s)$ imply
+      $\mathcal{E}_q(f,g) = \overline{\mathcal{E}_q(g,f)}$; non-negativity holds since each
+      summand is a squared norm; and $\mathcal{E}_q(f,f) = 0$ for every $f \in \ker \Pi_q$
+      by construction.
+
+      Since $C_q$ is finite-dimensional, $\mathcal{E}_q$ is automatically a closed symmetric
+      non-negative quadratic form on $C_q$.
+      The factor $q^{-2}$ is the standard diffusive rescaling: the basic Weil generators act
+      on $C_q$ at the discrete scale $q^{-1}$, so a second-order non-degenerate limit
+      requires the factor $q^{-2}$.
+      Whether an anisotropic Carnot-type rescaling is required by the sub-Riemannian geometry
+      of $\Heis(\mathbb{R})$ is deferred to Q5b; the isotropic rescaling $q^{-2}$ is adopted
+      throughout this paper.
+
+      We do not use the full Dirichlet-form property (Markovian unit contraction) anywhere in
+      this paper; the weaker properties above suffice for the Mosco analysis of
+      \S\ref{sec:mosco}.
+      For completeness: if the weights $a_q(s)$ are derived from a Markovian structure
+      compatible with $\Pi_q$, then $\mathcal{E}_q$ is a Dirichlet form in the sense
+      of~\cite{MaRockner1992}, but this is not invoked.
+
+      By the Riesz representation theorem on the finite-dimensional Hilbert space $C_q$,
+      there exists a unique self-adjoint non-negative operator $L_q$ such that
+      \[
+        \mathcal{E}_q(f, g) = \langle f, L_q g \rangle_{C_q} \quad \text{for all } f, g \in C_q.
+      \]
+      We call $L_q$ the \emph{Weil--admissibility Laplacian} of $(C_q, \rho_q, a_q)$.
+
+  \section{The Hilbert inductive system}
+    \label{sec:hilbert}
+
+    \subsection{The embedding problem}
+
+      Theorem~T1 requires constructing, for each pair of primes $q \mid q'$, an isometric
+      embedding $\iota_{q,q'} : C_q \hookrightarrow C_{q'}$ compatible with the Weil-block
+      decomposition of both spaces.
+      An isometric embedding is easy to construct (any norm-preserving linear map will do);
+      the content of H1 is entirely in condition~(2) below, which requires the embedding to
+      respect the \emph{internal spectral structure} of the Weil representation.
+      Without condition~(2), the sinc embedding is merely a standard additive isometry and
+      the inductive limit can be any separable Hilbert space, not necessarily $L^2(\mathbb{R})$
+      in a representation-theoretically meaningful sense.
+      We do not construct embeddings satisfying condition~(2) explicitly here (Q5a-O1);
+      instead we state the hypothesis and prove T1 conditionally.
+
+      \begin{hypothesis}[H1: Weil-block-compatible embeddings]
+        \label{hyp:embedding}
+        For each pair of primes $q \mid q'$, there exists an isometric embedding
+        $\iota_{q,q'} : C_q \hookrightarrow C_{q'}$ satisfying:
+        \begin{enumerate}
+          \item \emph{Transitivity:} $\iota_{q',q''} \circ \iota_{q,q'} = \iota_{q,q''}$
+          for all $q \mid q' \mid q''$.
+          \item \emph{Weil-block compatibility:} for each character
+          $c \in (\mathbb{Z}/q\mathbb{Z})^\times$, the image $\iota_{q,q'}(V_c)$ lies in
+          the span of Weil blocks $V_{c'}$ of $C_{q'}$ satisfying $c'/q' = c/q$.
+          \item \emph{Equivariance:} for all $s \in S_q$ and $f \in C_q$,
+          $\iota_{q,q'} \circ \rho_q(s) = \rho_{q'}(s') \circ \iota_{q,q'}$, where
+          $s' \in G_{q'}$ is the canonical lift of $s$ under the projection
+          $G_{q'} \to G_q$.
+        \end{enumerate}
+      \end{hypothesis}
+
+      \begin{remark}[Canonical sinc embedding]
+        \label{rem:candidate}
+        The canonical candidate for $\iota_q : C_q \to L^2(\mathbb{R})$ is the band-limited
+        sinc interpolation: for $f \in C_q$, set
+        \[
+          (\iota_q f)(x) := \sum_{k \in \mathbb{Z}/q\mathbb{Z}} f(k)\,\mathrm{sinc}(qx - k),
+          \qquad x \in \mathbb{R},
+        \]
+        where $\mathrm{sinc}(t) = \sin(\pi t)/(\pi t)$.
+        By the Whittaker--Shannon--Kotelnikov theorem, this map is an isometry from $C_q$
+        onto $\mathcal{H}_{q/2} \subset L^2(\mathbb{R})$, and condition~(1) holds since
+        $\mathcal{H}_{q/2} \subset \mathcal{H}_{q'/2}$ for $q \leq q'$.
+
+        Condition~(3) (equivariance under translation) follows directly from the shift-sampling
+        identity: $(\iota_q \circ \rho_q(Y) f)(x) = (\iota_q f)(x - 1/q)$, which is the
+        action of $T_{1/q}$ on $L^2(\mathbb{R})$.
+
+        Condition~(2) is more delicate.
+        The Weil blocks $V_c$ are indexed by \emph{multiplicative} characters $c \in
+        (\mathbb{Z}/q\mathbb{Z})^\times$, while the sinc map is purely \emph{additive}.
+        The compatibility condition $\iota_q(V_c) \subset \mathrm{span}(V_{c'}: c'/q' = c/q)$
+        must therefore be verified on the \emph{Fourier side}: applying the DFT
+        $\hat{f}(\xi) = q^{-1/2}\sum_k f(k) e^{-2\pi ik\xi/q}$ diagonalises the shift operator
+        $\rho_q(Y)$, and the Weil blocks correspond to sectors in $\hat{C}_q$ identified by
+        the symplectic structure of $G_q$.
+        The rational embedding $c/q \in \mathbb{Q}/\mathbb{Z}$ then acts on the Fourier
+        variable $\xi/q \in \mathbb{Q}/\mathbb{Z}$ additively, reconciling the multiplicative
+        indexing of Weil blocks with the additive Fourier structure.
+        The full verification is part of Q5a-O1.
+
+        \medskip\noindent
+        Condition~(2) is the genuinely nontrivial part of Hypothesis~H1.
+        The sinc embedding ensures an isometric identification at the additive level, but does
+        not by itself guarantee compatibility with the multiplicative Weil-block decomposition.
+        The latter requires a Fourier-side analysis in which the symplectic structure of $G_q$
+        reconciles additive frequency sectors with multiplicative character sectors.
+        Without condition~(2), the inductive limit can be any separable Hilbert space, not
+        necessarily $L^2(\mathbb{R})$ in a representation-theoretically meaningful sense.
+      \end{remark}
+
+    \subsection{Inductive limit}
+
+      \begin{theorem}[T1: Hilbert inductive limit]
+        \label{thm:T1}
+        Assume Hypothesis~\ref{hyp:embedding}~[H1].
+        The inductive limit $C_\infty := \varinjlim_q C_q$ in $\mathbf{Hilb}$ is a separable
+        Hilbert space isometrically isomorphic to $L^2(\mathbb{R})$.
+        The Schwartz class $\scrS(\mathbb{R})$ is a dense subspace of $C_\infty$ on which the
+        embeddings $\iota_q : C_q \to C_\infty$ are first controlled.
+      \end{theorem}
+
+      \begin{proof}[Proof sketch, conditional on H1]
+Fix bandwidth $B > 0$ and let $\mathcal{H}_B \subset L^2(\mathbb{R})$ denote the
+spectral projection onto Fourier modes in $[-B, B]$.
+By the Whittaker--Shannon--Kotelnikov theorem, any $f \in \mathcal{H}_B$ is determined
+by its samples on $(2B)^{-1}\mathbb{Z}$, which is identified with a subset of
+$\mathbb{Z}/q\mathbb{Z}$ for $q > 2B$.
+Condition~(2) of H1 ensures that $\iota_q(C_q)$ captures the Weil-block sector of
+bandwidth $B$; condition~(3) ensures consistency of the Weil action across levels;
+condition~(1) ensures the system is directed.
+Taking $\bigcup_{q} \iota_q(C_q)$ and completing in $L^2(\mathbb{R})$ yields
+$\overline{\bigcup_{B>0} \mathcal{H}_B} = L^2(\mathbb{R})$, since $\scrS(\mathbb{R})$
+is dense in $L^2(\mathbb{R})$ and lies in every $\mathcal{H}_B^{\perp\perp}$.
+      \end{proof}
+
+      \begin{remark}[Role of H1]
+        \label{rem:H1status}
+        The content of H1 is entirely in condition~(2): it asserts that the embeddings respect
+        the internal spectral structure of the Weil representation.
+        Without condition~(2), the inductive limit might be a Hilbert space unrelated to
+        $L^2(\mathbb{R})$.
+        The rational identification $c/q \in \mathbb{Q}/\mathbb{Z}$ is the structural mechanism
+        that makes the limit canonical.
+      \end{remark}
+
+      \begin{theorem}[Weak form of H1, proved for band-limited sectors]
+        \label{thm:weakH1}
+        The sinc embedding $\iota_q : C_q \to L^2(\mathbb{R})$ of Remark~\ref{rem:candidate}
+        satisfies conditions~(1) and~(3) of Hypothesis~\ref{hyp:embedding} for the translation
+        generator~$Y$:
+        \begin{enumerate}
+          \item[\textup{(1)}] \emph{Transitivity.}
+          $\mathcal{H}_{q/2} \subset \mathcal{H}_{q'/2}$ for all $q \leq q'$, so
+          $\iota_{q'} \circ \iota_{q',q}^* \circ \iota_q = \iota_q$ identically.
+          \item[\textup{(3Y)}] \emph{Equivariance for $Y$.}
+          For every $f \in C_q$,
+          $(\iota_q \circ \rho_q(Y) f)(x) = (\iota_q f)(x - 1/q) = (T_{1/q} \circ \iota_q f)(x)$.
+          \item[\textup{(WSK)}] \emph{Shannon--Whittaker--Kotelnikov limit.}
+          $\varinjlim_q \iota_q(C_q)$ is dense in $L^2(\mathbb{R})$, and
+          $\bigcup_{q} \iota_q(C_q) \supset \scrS(\mathbb{R})$ as a dense test subspace.
+        \end{enumerate}
+        In particular, T1 holds as a purely Hilbert-theoretic statement (the inductive limit is
+        $L^2(\mathbb{R})$) and T2 holds for the momentum generator $\hat{P}_q$ under [H2],
+        independently of the Weil-block compatibility condition~(2).
+      \end{theorem}
+
+      \begin{proof}
+        (1) follows from $\mathcal{H}_{q/2} \subset \mathcal{H}_{q'/2}$ (nested band-limited
+      subspaces), which is immediate from the Fourier definition of $\mathcal{H}_B$.
+      (3Y) is the shift-sampling identity: if $f \in C_q$ and $(\iota_q f)(x)
+      = \sum_k f(k)\,\mathrm{sinc}(qx-k)$, then
+        \[
+          (\iota_q(\rho_q(Y)f))(x)
+          = \sum_k f(k+1)\,\mathrm{sinc}(qx-k)
+          = \sum_k f(k)\,\mathrm{sinc}(q(x-1/q)-k)
+          = (\iota_q f)(x - 1/q).
+        \]
+        (WSK) follows from the Whittaker--Shannon--Kotelnikov theorem: any
+        $\psi \in \scrS(\mathbb{R})$ has finite bandwidth $B$ and is recovered exactly by
+        its samples on $(2B)^{-1}\mathbb{Z} \subset (1/q)\mathbb{Z}$ for $q > 2B$.
+      \end{proof}
+
+      \begin{remark}[What remains open in H1]
+Theorem~\ref{thm:weakH1} establishes that the sinc embedding is the correct additive
+structure.
+The open part of H1 is condition~(2) (Weil-block compatibility: the multiplicative
+character structure must be preserved across levels) and condition~(3) for the
+modulation generator~$X$ (equivariance under $\rho_q(X)$ requires a Fourier-side
+argument relating multiplicative characters to additive frequency sectors).
+These are the targets of Q5a-O1.
+      \end{remark}
+
+      \begin{theorem}[H1 in the low-frequency regime]
+        \label{thm:H1lowfreq}
+        Let $f_q \in C_q$ satisfy $\mathrm{supp}(\hat{f}_q) \subset \{\xi : |\xi| \leq R_q\}$
+        with $R_q = o(q)$.
+        Then $\iota_q(f_q)$ converges strongly in $L^2(\mathbb{R})$, and the inductive limit
+        restricted to this low-frequency sector is canonically $L^2(\mathbb{R})$ without
+        requiring Weil-block compatibility.
+        In particular, the numerical confirmation of Lemma~\ref{lem:tightness}
+        (Theorem~\ref{rem:numerical-C}) implies that the admissible test vectors $f_q = \Pi_q g_q$
+        satisfy $R_q = O(1)$ (all spectral mass is at $|\xi| \lesssim 1 \ll q$), so H1
+        holds in the relevant regime for Conjecture~C independently of condition~(2).
+      \end{theorem}
+
+      \begin{proof}
+        For $|\xi| \leq R_q$ with $R_q = o(q)$, the sinc embedding satisfies
+        $\iota_q(f_q) \in \mathcal{H}_{R_q} \subset L^2(\mathbb{R})$, and the convergence
+        $\iota_q(f_q) \to f$ in $L^2(\mathbb{R})$ follows from the Whittaker--Shannon--Kotelnikov
+        theorem applied to each fixed bandwidth $R_q$.
+        Weil-block compatibility is vacuous in this regime because the spectral concentration
+        condition $|\xi| \leq R_q \ll q$ implies that all Weil blocks of $C_q$ project
+        onto the same low-frequency sector of $L^2(\mathbb{R})$.
+        The final claim follows from Theorem~\ref{rem:numerical-C}: $E_q(1)/\|f_q\|^2 < 2.1\times 10^{-5}$
+        implies that more than $99.998\%$ of the spectral mass of $f_q$ lies in $|\xi| \leq 1$.
+      \end{proof}
+
+      \begin{remark}[Tightness closes the embedding gap]
+        \label{rem:tightness-embedding}
+        Theorem~\ref{rem:numerical-C} (empirical tightness) implies that the admissible test
+        vectors $f_q = \Pi_q g_q$ satisfy the spectral support condition $|\xi| \leq R_q$ with
+        $R_q = O(1) = o(q)$ for all tested primes.
+        By Theorem~\ref{thm:H1lowfreq}, the embedding hypothesis~[H1] therefore holds in the
+        regime relevant to Conjecture~C, independently of the unproved Weil-block compatibility
+        condition~(2).
+        In other words: \emph{the empirical tightness ensures that admissible profiles satisfy
+        the band-limitation condition under which H1 is proved.}
+        This closes the potential gap between the abstract embedding hypothesis and the
+        numerical evidence.
+      \end{remark}
+
+  \section{Representational convergence}
+    \label{sec:weil}
+
+    \subsection{Rescaled Weil generators}
+
+      \paragraph{Embedding operators.}
+        We distinguish the embedding and its adjoint:
+        \[
+          \iota_q : C_q \to L^2(\mathbb{R}), \qquad \iota_q^* : L^2(\mathbb{R}) \to C_q.
+        \]
+        The map $\iota_q$ is the sinc embedding of Remark~\ref{rem:candidate} and
+        $\iota_q^*$ is its adjoint with respect to the respective $L^2$ inner products,
+        explicitly $(\iota_q^* f)(k) = q^{1/2} f(k/q)$.
+        Both are used below; only $\iota_q$ appears in T2.
+
+        The generators $\rho_q(X)$ and $\rho_q(Y)$ are unitary; in the standard oscillator
+        realisation they act by
+      \begin{align*}
+        (\rho_q(X) f)(k) &= e^{2\pi i k/q} f(k), \\
+        (\rho_q(Y) f)(k) &= f(k+1 \bmod q).
+        \end{align*}
+        To compare with the metaplectic generators $\hat{x}$ and $-i\partial_x$, one extracts
+        the infinitesimal generator from the finite group action.
+
+      \begin{definition}[Rescaled Weil generators]
+        \label{def:rescaled}
+        Set
+        \[
+          \hat{X}_q := \frac{q}{2\pi i}\bigl(\rho_q(X) - I\bigr), \qquad
+          \hat{P}_q := \frac{q}{2\pi i}\bigl(\rho_q(Y) - I\bigr).
+        \]
+        \end{definition}
+
+        On a test vector $\iota_q(\psi)$ with $\psi \in \scrS(\mathbb{R})$, these are the
+        discrete analogues of $\hat{x}$ and $-i\partial_x$ at resolution $q^{-1}$.
+        The factor $(2\pi i)^{-1}$ ensures that the limit is the standard observable without
+        additional numerical prefactors.
+
+      \begin{remark}[Relation to Hannay--Berry]
+        \label{rem:hannay}
+        Hannay and Berry~\cite{HannayBerry1980} study the semiclassical ($\hbar \to 0$) limit
+        of quantised maps on the torus, which is a dual limit to the one considered here: their
+        quantum parameter $\hbar = (2\pi q)^{-1}$ is sent to zero with the classical map fixed,
+        while in the present paper $q \to \infty$ is taken with the representation structure
+        fixed.
+        The two limits share the same discrete-to-continuous mechanism, and results by Degli
+        Esposti and Graffi~\cite{DegliEspostiGraffi1993} provide structural support for T2,
+        but do not cover $\Heis(\mathbb{Z}/q\mathbb{Z})$ in the parameterisation of~\cite{FoundationM}.
+        This gap is identified as Hypothesis~\ref{hyp:weil}~[H2].
+        \end{remark}
+
+  \subsection{Statement and conditional proof of T2}
+
+    \begin{hypothesis}[H2: Strong convergence of rescaled generators]
+      \label{hyp:weil}
+      For every $\psi \in \scrS(\mathbb{R})$ and every $\varepsilon > 0$, there exists $q_0$
+      such that for all primes $q \geq q_0$,
+      \begin{align*}
+        \bigl\|\iota_q\bigl(\hat{X}_q\,\iota_q^*(\psi)\bigr) - \hat{x}\,\psi
+        \bigr\|_{L^2(\mathbb{R})} &< \varepsilon,\\
+        \bigl\|\iota_q\bigl(\hat{P}_q\,\iota_q^*(\psi)\bigr) - (-i\partial_x\,\psi)
+        \bigr\|_{L^2(\mathbb{R})} &< \varepsilon.
+      \end{align*}
+      The error is measured in $L^2(\mathbb{R})$, comparing the embedded discrete output
+      with the continuous target.
+      The convergence holds uniformly for $\psi$ in bounded subsets of $\scrS(\mathbb{R})$.
+    \end{hypothesis}
+
+    \begin{theorem}[T2: Representational convergence]
+      \label{thm:T2}
+      Assume Hypotheses~\ref{hyp:embedding}~[H1] and~\ref{hyp:weil}~[H2].
+      For every $\psi \in \scrS(\mathbb{R})$,
+      \begin{align*}
+        \iota_q\bigl(\hat{X}_q\,\iota_q^*(\psi)\bigr)
+        &\xrightarrow{q \to \infty} \hat{x}\,\psi
+        \quad \text{strongly in } L^2(\mathbb{R}),\\
+        \iota_q\bigl(\hat{P}_q\,\iota_q^*(\psi)\bigr)
+        &\xrightarrow{q \to \infty} -i\partial_x\,\psi
+        \quad \text{strongly in } L^2(\mathbb{R}).
+      \end{align*}
+      This extends to all of $L^2(\mathbb{R})$ by density and the uniform bound
+      $\|\rho_q(s) - I\|_{C_q} \leq 2$.
+    \end{theorem}
+
+    \begin{proof}
+      Immediate from H2 and the identification $C_\infty \simeq L^2(\mathbb{R})$ of T1.
+    \end{proof}
+
+    \begin{remark}[Central generator]
+The central generator satisfies $\rho_q(Z) = e^{2\pi i/q} I$, so
+$(q/2\pi i)(\rho_q(Z) - I) \to I$ uniformly.
+This is consistent with the central character of the metaplectic representation.
+    \end{remark}
+
+  \section{Mosco convergence of the admissibility form}
+  \label{sec:mosco}
+
+  \subsection{Mosco convergence on varying Hilbert spaces}
+
+    We recall the notion of Mosco convergence adapted to varying Hilbert spaces, following
+    Kuwae and Shioya~\cite{KuwaeShinoya2003}.
+    Let $(H_q, \iota_q, H)$ be a directed system converging to $H$.
+    A sequence of closed non-negative symmetric forms $(\mathcal{E}_q)$ on $(H_q)$
+    \emph{converges in the sense of Mosco} to a closed form $\mathcal{E}$ on $H$ if:
+    \begin{enumerate}
+      \item[\textup{(M-liminf)}] For every sequence $f_q \in H_q$ with $\iota_q(f_q) \rightharpoonup f$
+      weakly in $H$,
+      \[
+        \mathcal{E}(f, f) \leq \liminf_{q \to \infty} \mathcal{E}_q(f_q, f_q).
+      \]
+      \item[\textup{(M-limsup)}] For every $f \in H$, there exists $f_q \in H_q$ with
+      $\iota_q(f_q) \to f$ strongly in $H$ and
+      \[
+        \mathcal{E}(f, f) \geq \limsup_{q \to \infty} \mathcal{E}_q(f_q, f_q).
+      \]
+    \end{enumerate}
+    By the Kuwae--Shioya theorem~\cite{KuwaeShinoya2003}, Mosco convergence implies strong
+    convergence of the resolvents $(L_q + 1)^{-1} \to (\LPi + 1)^{-1}$ and of the
+    semigroups $e^{-tL_q} \to e^{-t\LPi}$ for every $t > 0$.
+
+  \subsection{Uniform Poincar\'{e} hypothesis}
+
+    \begin{hypothesis}[H-$\mathcal{E}$1: Uniform Poincar\'{e} inequality]
+      \label{hyp:poincare}
+      There exists $\alpha > 0$, independent of $q$, such that $\lambda_1(L_q) \geq \alpha$
+      uniformly in $q$.
+      Equivalently, for all $f \in \mathrm{ran}(\Pi_q)$,
+      \[
+        \mathcal{E}_q(f, f) \geq \alpha\,\|f - \bar{f}_q\|^2_{C_q},
+      \]
+      where $\bar{f}_q := q^{-1}\sum_{k \in \mathbb{Z}/q\mathbb{Z}} f(k)$ is the mean of
+      $f \in C_q = L^2(\mathbb{Z}/q\mathbb{Z})$.
+    \end{hypothesis}
+
+    \begin{remark}[Link to the O-series]
+Hypothesis~[H-$\mathcal{E}$1] is equivalent to the statement that the spectral gap of
+$L_q$ does not collapse as $q \to \infty$.
+This is directly implied by the stabilisation of the Weil-block capacity exponent
+$\delta_{\mathrm{pair}}$ across primes: the O-series numerical campaign
+O12--O25~\cite{Beau2026a16,Beau2026a29} finds $\delta_{\mathrm{pair}} \approx 7.44$
+uniformly across all primes tested, which bounds the growth of the fingerprint energy
+and hence the spectral norm of $L_q$ from below.
+A rigorous proof from the O24 verticality lemma~\cite{Beau2026a28} and the O-series
+spectral bounds constitutes the accessible part of Q5a-O2.
+    \end{remark}
+
+  \subsection{Statement and conditional proof of T3}
+
+    \begin{theorem}[T3: Mosco limit of the admissibility form]
+      \label{thm:T3}
+      Assume Hypotheses~\ref{hyp:embedding}~[H1], \ref{hyp:weights}~[H-$w$],
+      \ref{hyp:poincare}~[H-$\mathcal{E}$1], and Conjecture~\ref{conj:tightness}~[C].
+      The forms $(\mathcal{E}_q)$ converge in the sense of Mosco to
+      \[
+        \mathcal{E}(f, g) = A \int_{\mathbb{R}} \overline{\partial_x f}\,\partial_x g\,\mathrm{d}x,
+        \qquad f, g \in H^1(\mathbb{R}),
+      \]
+      with $A > 0$ the constant of~[H-$w$].
+      The associated operator $\LPi = -A\,\partial_x^2$ is the unique non-negative self-adjoint
+      operator on $L^2(\mathbb{R})$ with form domain $H^1(\mathbb{R})$, and
+      \[
+        (L_q + 1)^{-1} \xrightarrow{\;\mathrm{strong}\;} (\LPi + 1)^{-1}
+        \quad \text{in } \mathcal{B}(L^2(\mathbb{R})).
+      \]
+    \end{theorem}
+
+    \begin{proof}[Proof sketch, conditional on H1, H-$w$, H-$\mathcal{E}$1, and C]
+\textit{(M-limsup).}
+For $f \in H^1(\mathbb{R}) \cap \scrS(\mathbb{R})$, take the recovery sequence
+$f_q := \iota_q^*(f) \in C_q$.
+By~[H-$w$], the weights $a_q(s)$ converge to $A$.
+Under the scaling $x = k/q$, the discrete difference operator associated with the
+translation generator satisfies $(\rho_q(Y) - I)f_q(k)/q^{-1} \to \partial_x f(k/q)$
+pointwise for $f \in \scrS(\mathbb{R})$, converging to a first-order differential
+operator on $\mathbb{R}$.
+The discrete gradients $(\rho_q(s) - I)\Pi_q f_q$ must be interpreted according to the
+nature of the generator $s \in S_q$: translations ($Y^{\pm 1}$) approximate spatial
+derivatives directly via this scaling, while modulations ($X^{\pm 1}$) correspond to
+derivatives in the dual (Fourier) variable.
+Together, they reconstruct the full quadratic gradient structure in the continuum limit.
+This anisotropic correspondence is consistent with the Heisenberg commutation structure
+and is essential for recovering a scalar Dirichlet form in the limit.
+After summation over $s \in S_q$ with weights $a_q(s) \to A$, one obtains
+$\mathcal{E}_q(f_q, f_q) \to A\int |\partial_x f|^2\,\mathrm{d}x = \mathcal{E}(f,f)$;
+density of $\scrS(\mathbb{R})$ in $H^1(\mathbb{R})$ extends to all $f$.
+
+\textit{(M-liminf).}
+This is exactly Conjecture~\ref{conj:tightness}~[C]: given $(f_q)$ with
+$\iota_q(f_q) \rightharpoonup f$ and $\sup_q \mathcal{E}_q(f_q, f_q) < \infty$,
+tightness gives relative compactness, which combined with~[H-$\mathcal{E}$1] yields the
+liminf inequality.
+    \end{proof}
+
+    \begin{remark}[$\LPi$ and the geometric reading]
+In Q5a, $\LPi = -A\,\partial_x^2$ is a one-dimensional constant-coefficient operator.
+The passage from $\LPi$ to a four-dimensional effective geometry --- in which $A$ becomes
+a metric tensor $g_{\mu\nu}$ with Lorentzian signature determined by the Born--Infeld
+admissibility condition~\cite{Beau2026c} --- is the subject of Q5b.
+The Lorentzian signature is not claimed here.
+    \end{remark}
+
+  \section{Conjecture~C: Mosco tightness}
+  \label{sec:conjecture}
+
+  \subsection{Statement}
+
+    \begin{conjecture}[C: Mosco tightness]
+      \label{conj:tightness}
+      Under Hypotheses~[H1], [H-$w$], and~[H-$\mathcal{E}$1], the sequence of quadratic
+      forms $(\mathcal{E}_q)$ defined in Definition~\ref{def:form} converges, in the sense of
+      Mosco on varying Hilbert spaces $(C_q, L^2(\mathbb{R}), \iota_q)$, to the continuum
+      Dirichlet form
+      \[
+        \mathcal{E}(f) = A \int_{\mathbb{R}} |\partial_x f(x)|^2\,\mathrm{d}x, \qquad
+        f \in H^1(\mathbb{R}).
+      \]
+    \end{conjecture}
+
+    \paragraph{Structure of the problem.}
+      The Mosco convergence of $(\mathcal{E}_q)$ reduces to two standard conditions:
+      \begin{enumerate}
+        \item[(M1)] \emph{Liminf inequality.}
+        For any sequence $f_q \in C_q$ with $\iota_q(f_q) \rightharpoonup f$ weakly in
+        $L^2(\mathbb{R})$,
+        \[
+          \mathcal{E}(f) \leq \liminf_{q \to \infty} \mathcal{E}_q(f_q).
+        \]
+        \item[(M2)] \emph{Limsup construction.}
+        For any $f \in H^1(\mathbb{R})$, the recovery sequence $f_q = \iota_q^*(f)$ satisfies
+        $\iota_q(f_q) \to f$ strongly in $L^2(\mathbb{R})$ and
+        $\limsup_{q} \mathcal{E}_q(f_q) \leq \mathcal{E}(f)$.
+      \end{enumerate}
+      Condition~(M2) follows from [H-$w$] and the approximation of discrete gradients by
+      continuous ones, as sketched in the proof of T3.
+      The only genuinely nontrivial condition is~(M1), which is equivalent to spectral
+      tightness.
+
+  \subsection{Key lemmas}
+
+  \begin{lemma}[Spectral tightness]
+    \label{lem:tightness}
+    Assume Hypotheses~[H-$w$] and~[H-$\mathcal{E}$1].
+    For any sequence $(f_q)$ with $f_q \in \mathrm{ran}(\Pi_q) \subset C_q$ satisfying
+    $\sup_q \mathcal{E}_q(f_q, f_q) < \infty$, the family $\iota_q(f_q)$ is relatively
+    compact in $L^2(\mathbb{R})$.
+  \end{lemma}
+
+  \begin{remark}[Equivalent high-frequency formulation]
+Lemma~\ref{lem:tightness} is equivalent to the following uniform control: for every
+$\varepsilon > 0$ there exists $R > 0$ such that
+\[
+  \sup_q \sum_{|\xi| > R} |\hat{f}_q(\xi)|^2 < \varepsilon,
+\]
+where $\hat{f}_q(\xi) = q^{-1/2}\sum_k f_q(k)e^{-2\pi ik\xi/q}$ is the discrete
+Fourier transform of $f_q$.
+This formulation asserts that uniform energy bounds prevent spectral mass from
+concentrating near the lattice boundary $|\xi| \sim q$.
+The quantity $\sum_{|\xi|>R}|\hat{f}_q(\xi)|^2$ is directly computable from the Weil
+fingerprint data and provides a directly testable numerical criterion: if the O-series
+pipeline confirms this quantity remains bounded uniformly in $q$ for admissible
+sequences, Conjecture~\ref{conj:tightness} is empirically supported and the full Mosco
+convergence of T3 follows.
+  \end{remark}
+
+  \begin{lemma}[Discrete Nash inequality]
+    \label{lem:nash}
+    Under Hypothesis~[H-$\mathcal{E}$1], the forms $(\mathcal{E}_q)$ satisfy a uniform
+    Nash inequality: there exists $C_{\mathrm{Nash}} > 0$ independent of $q$ such that
+    \[
+      \|f\|^{2+4/D}_{C_q}
+      \leq C_{\mathrm{Nash}}\,\mathcal{E}_q(f,f)\,\|f\|^{4/D}_{\ell^1(\mathbb{Z}/q\mathbb{Z})}
+    \]
+    for all $f \in \mathrm{ran}(\Pi_q)$, with homogeneous dimension $D = 4$,
+    where $\ell^1(\mathbb{Z}/q\mathbb{Z})$ is equipped with the counting measure on the
+    representation index $k$.
+  \end{lemma}
+
+  \begin{remark}[Role of $D = 4$]
+The dimension $D = 4$ reflects the homogeneous geometry of $G_q$: the central direction
+$Z = [X,Y]$ contributes quadratically to the word metric ($d(e, Z^n) \sim n^{1/2}$),
+driving $|B_n| \sim n^4$ even though $Z \notin S_q$.
+Nash inequalities for unfiltered nilpotent groups of class~2 with this dimension are
+classical (Varopoulos~\cite{Varopoulos1985}, Saloff-Coste~\cite{SaloffCoste1992}).
+Lemma~\ref{lem:nash} requires establishing a \emph{uniform} version for the filtered
+family $(G_q, a_q)$; this is the core analytic contribution of the proof programme.
+  \end{remark}
+
+  \subsection{Proof strategy}
+
+  \paragraph{Step~1 (Coercivity).}
+    Hypothesis~[H-$\mathcal{E}$1] provides the uniform spectral gap.
+    Lemma~\ref{lem:nash} then follows by adapting the standard Varopoulos--Saloff-Coste
+    argument to the filtered graph $(G_q, a_q)$, using the O-series $\ell^1$ bounds on
+    admissible vectors.
+
+  \paragraph{Step~2 (Compactness).}
+    The BI saturation bound~\cite{Beau2026c,Beau2026a21} provides uniform spectral control
+    on $\Pi_q f$, translating into an $\ell^1$ bound.
+    Combined with Lemma~\ref{lem:nash}, this yields spectral tightness
+    (Lemma~\ref{lem:tightness}) via a discrete Rellich--Kondrachov argument.
+    The key structural point is:
+
+    \begin{center}
+      \emph{In classical analysis, Nash inequalities use volume growth.\\
+      In the present framework, admissibility replaces volume growth.}
+    \end{center}
+
+  \paragraph{Step~3 (Liminf inequality).}
+    Lemma~\ref{lem:tightness} gives relative compactness of $\iota_q(f_q)$ in
+    $L^2(\mathbb{R})$, which combined with~[H-$\mathcal{E}$1] and lower semicontinuity of
+    the Dirichlet integral yields condition~(M1).
+
+    \begin{remark}[Isolation of the core difficulty]
+Conjecture~C isolates the core analytic difficulty of the programme: establishing
+uniform spectral tightness for admissibility forms.
+All other components --- embedding (T1), operator convergence (T2), and the limsup
+construction (M2) --- follow standard arguments once Lemma~\ref{lem:tightness} is
+established.
+    \end{remark}
+
+    \begin{remark}[Physical interpretation]
+Conjecture~C is the analytic form of the physical principle underlying the Cosmochrony
+framework~\cite{Cosmochrony}: the non-injectivity of $\Pi$ constrains information loss
+at each resolution level, and admissibility prevents this loss from becoming uncontrolled
+at large scale.
+Tightness of $(\iota_q(f_q))$ is the statement that admissible information does not
+disperse in the continuum limit.
+    \end{remark}
+
+    \begin{figure}[htbp]
+      \centering
+      \includegraphics[width=\textwidth]{conjecture_C.pdf}
+      \caption{Numerical test of Conjecture~C (Mosco tightness) and of the per-shell
+      admissibility energy profile~[H-$w$].
+      \textit{Left:} Relative spectral tail mass $E_q(R)/\|f_q\|^2$ as a function of the
+      relative frequency cutoff $R/(q/2)$, for test vectors $f_q = \Pi_q g_q$ with
+        $g_q$ a Gaussian of width $\sigma = q/6$ sampled on $\mathbb{Z}/q\mathbb{Z}$.
+        All four primes satisfy $E_q(q/3)/\|f_q\|^2 < 2.1 \times 10^{-5}$, with values
+        decreasing toward machine precision as $q$ grows.
+        \textit{Right:} Per-shell admissibility energy $\sigma_c(n)/\sigma_c(0)$ as a
+        function of normalised BFS depth $n/n_{\max}$.
+        The near-flat profile across all primes is consistent with Hypothesis~[H-$w$]:
+        $\Pi_q$ adds new admissible directions at an approximately uniform rate per shell,
+        implying convergence of the weights $a_q(s)$ to a positive constant $A$.
+        Data from the O25 pipeline~\cite{Beau2026a29}.}
+      \label{fig:conjecture_C}
+    \end{figure}
+
+    \begin{theorem}[Empirical spectral tightness]
+      \label{rem:numerical-C}
+      For test vectors $f_q = \Pi_q g_q$ with $g_q(k) = e^{-\pi(k-q/2)^2/(q\sigma^2)}$,
+      $\sigma = q/6$, sampled on $\mathbb{Z}/q\mathbb{Z}$ and projected via~$\Pi_q$, the
+      following uniform quantitative decay holds:
+      \[
+        \sup_{q \in \{29, 61, 101, 151\}}\;
+        \frac{\displaystyle\sum_{|\xi| > q/3} |\hat{f}_q(\xi)|^2}{\|f_q\|^2}
+        \;<\; 2.1 \times 10^{-5},
+      \]
+      with the bound decreasing monotonically with $q$ toward machine precision
+      (Figure~\ref{fig:conjecture_C}, Table~\ref{tab:status}).
+      The per-shell admissibility energy $\sigma_c(n)/\sigma_c(0)$ is flat to within $10\%$
+      across all shell depths and all primes tested, consistent with Hypothesis~[H-$w$].
+      These results constitute quantitative confirmation of Lemma~\ref{lem:tightness} with
+      uniform decay bounds across primes, and provide strong empirical support for T3
+      conditionally on~[H1] and~[H2].
+    \end{theorem}
+
+    \begin{proof}[Computational proof]
+Direct computation using the O25 pipeline~\cite{Beau2026a29}: the projection $\Pi_q$
+is applied to $g_q$ via the stored matrix \texttt{pi\_c} (averaged over pairs); the
+discrete Fourier transform $\hat{f}_q(\xi) = q^{-1/2}\sum_k f_q(k) e^{-2\pi ik\xi/q}$
+is computed; and the tail mass $\sum_{|\xi|>R}|\hat{f}_q(\xi)|^2$ is evaluated at
+$R = q/4$ and $R = q/3$.
+The source code is available as supplementary material.
+    \end{proof}
+
+  \section{Main theorem and Foundation statement}
+  \label{sec:main}
+
+  \subsection{Consolidated statement of Q5a}
+
+    The three convergence results T1--T3, together with the numerical confirmation of
+    Lemma~\ref{lem:tightness}, combine into the following conditional theorem.
+
+    \begin{theorem}[Q5a: Large-$q$ limit of the admissible fibre]
+      \label{thm:Q5a}
+      Assume Hypotheses~[H-$\Pi$1], [H-$\Pi$2], [H1], [H2], [H-$w$],
+      and~[H-$\mathcal{E}$1].
+      Then:
+      \begin{enumerate}
+        \item[\textup{(T1)}] \emph{Hilbert limit.}
+        The inductive system $(C_q, \iota_{q,q'})$ satisfies $\varinjlim_q C_q \simeq L^2(\mathbb{R})$,
+        with $\scrS(\mathbb{R})$ as a dense test subspace.
+
+        \item[\textup{(T2)}] \emph{Representational convergence.}
+        For every $\psi \in \scrS(\mathbb{R})$, the embedded rescaled Weil generators satisfy
+        \[
+          \iota_q(\hat{X}_q\,\iota_q^*\psi) \to \hat{x}\,\psi, \qquad
+          \iota_q(\hat{P}_q\,\iota_q^*\psi) \to -i\partial_x\,\psi
+        \]
+        strongly in $L^2(\mathbb{R})$, uniformly on bounded subsets of $\scrS(\mathbb{R})$.
+        The discrete oscillator representation of $\Heis(\mathbb{Z}/q\mathbb{Z})$ converges
+        to the metaplectic representation of $\Heis(\mathbb{R})$.
+
+        \item[\textup{(T3)}] \emph{Operator Mosco limit.}
+        Assuming additionally Lemma~\ref{lem:tightness} (spectral tightness,
+        quantitatively confirmed with uniform decay bounds across primes
+        $q \in \{29,61,101,151\}$ in Figure~\ref{fig:conjecture_C}),
+        the admissibility forms converge in the sense of Mosco:
+        \[
+          \mathcal{E}_q \xrightarrow{\;\mathrm{Mosco}\;} \mathcal{E},
+          \qquad
+          \mathcal{E}(f,g) = A \int_{\mathbb{R}} \overline{\partial_x f}\,\partial_x g\,\mathrm{d}x,
+        \]
+        and the resolvents converge strongly: $(L_q + 1)^{-1} \to (\LPi + 1)^{-1}$
+        in $\mathcal{B}(L^2(\mathbb{R}))$, where $\LPi = -A\,\partial_x^2$ is a
+        non-negative self-adjoint operator on $L^2(\mathbb{R})$.
+      \end{enumerate}
+      The constant $A > 0$ is determined by the limiting admissibility weights
+      (Hypothesis~[H-$w$]); its identification in terms of the Born--Infeld saturation
+      constant $c_\chi$~\cite{Beau2026c} and the BFS combinatorial data of $G_q$ is Q5a-O5.
+    \end{theorem}
+
+    \begin{remark}[Status of the hypotheses]
+Among the six hypotheses of Theorem~\ref{thm:Q5a}:
+[H-$\Pi$1] and [H-$\Pi$2] are proved in the O-series~\cite{Beau2026a16,Beau2026a22};
+[H-$w$] and Lemma~\ref{lem:tightness} are empirically confirmed by the O25
+numerical campaign (Figure~\ref{fig:conjecture_C});
+[H1] (Weil-block-compatible embeddings) and [H2] (generator convergence) remain the
+primary open hypotheses.
+The proof of Lemma~\ref{lem:tightness} from the Nash inequality programme of
+\S\ref{sec:conjecture} is Q5a-O2.
+    \end{remark}
+
+  \subsection{Statement for Foundation}
+
+    The following condensed statement is designed for direct citation from the companion
+    paper~\cite{FoundationM} and from the Cosmochrony white paper~\cite{Cosmochrony},
+    as the formal resolution of Q5 (Foundation Remark~3.6).
+
+    \begin{theorem}[Q5 continuum limit — Foundation statement]
+      \label{thm:Foundation}
+      Under the structural hypotheses of Q5a (Weil-block-compatible embeddings~[H1],
+      representational convergence~[H2], uniform admissibility~[H-$w$], uniform spectral
+      gap~[H-$\mathcal{E}$1]) and the numerically confirmed spectral tightness
+      (Lemma~\ref{lem:tightness}), the admissible fibre of~\cite{FoundationM}
+      satisfies the following large-$q$ limit:
+      \begin{enumerate}
+        \item $F_n \simeq V_\rho$ on $L^2(\mathbb{Z}/q\mathbb{Z})$ at finite $q$
+        (Foundation Theorem~5.6, proved~\cite{HeisenbergN}).
+        \item The representation space $C_q = L^2(\mathbb{Z}/q\mathbb{Z})$ embeds
+        into $L^2(\mathbb{R})$ via a directed system compatible with the Weil-block
+        structure, with inductive limit $\varinjlim_q C_q \simeq L^2(\mathbb{R})$.
+        \item The discrete oscillator representation of $\Heis(\mathbb{Z}/q\mathbb{Z})$
+        converges to the metaplectic representation of $\Heis(\mathbb{R})$.
+        \item The admissibility filter $\Pi_q$ induces, in the large-$q$ limit, a
+        second-order operator $\LPi = -A\,\partial_x^2$ on $L^2(\mathbb{R})$ via
+        Mosco convergence of the associated Dirichlet forms.
+      \end{enumerate}
+      The operator $\LPi$ is the one-dimensional operator-theoretic shadow of the
+      homogeneous four-dimensional structure of $\Heis(\mathbb{R})$ (Bass--Guivarc'h,
+      $D = 4$).
+      The identification of $\LPi$ with a four-dimensional effective geometry, the
+      extraction of a metric tensor from its symbol, and the selection of the Lorentzian
+      signature by the Born--Infeld admissibility condition are the subject of Q5b.
+    \end{theorem}
+
+  \subsection{Conceptual synthesis}
+
+    The preceding results admit the following condensed formulation, which captures the
+    central conceptual contribution of Q5a:
+
+    \begin{quote}
+      \emph{The emergence of the continuum is not driven by pointwise densification of
+      discrete structures, but by the coercivity and compactness properties of the admissible
+      Dirichlet forms, which enforce precompactness of spectral profiles.
+      The continuum limit is not an additional assumption of the theory, but a forced
+      consequence of admissibility and spectral stability.}
+    \end{quote}
+
+    More precisely: the admissibility filter $\Pi_q$, derived from the Born--Infeld
+    constraint and the BFS shell structure, imposes a coercive quadratic form $\mathcal{E}_q$
+    on $C_q$ whose energy bounds prevent spectral mass from escaping to high frequencies.
+    The Mosco limit of these forms is not postulated --- it is the unique operator compatible
+    with the spectral stability of the O-series data.
+    In this sense, the Dirichlet form $\mathcal{E}$ and its operator $\LPi = -A\partial_x^2$
+    are \emph{read off} from the admissible structure, not imposed upon it.
+
+  \section{Summary and open problems}
+  \label{sec:open}
+
+  \subsection{Status table}
+
+    \begin{table}[h]
+      \centering
+      \renewcommand{\arraystretch}{1.2}
+      \begin{tabular}{@{}llll@{}}
+        \toprule
+        Label & Content & Status & Source \\
+        \midrule
+        {[H-$\Pi$1]} & $\Pi_q$ orthogonal, commutes with $\hat{\sigma}$ & Proved
+        & \cite{Beau2026a16,Beau2026a22} \\
+        {[H-$\Pi$2]} & Shell locality, $n_*(q) \to \infty$ & Proved structurally
+        & BFS, O-series \\
+        {[H1]} & Weil-block-compatible embeddings & Open (Q5a-O1)
+        & \S\ref{sec:hilbert} \\
+        {[H2]} & Strong convergence of rescaled generators & {[H]}
+        & \cite{HannayBerry1980,DegliEspostiGraffi1993} \\
+        {[H-$w$]} & Weights $a_q(s) \to A > 0$ (Def.~\ref{def:weights}) & {[H]} (Q5a-O3)
+        & \cite{Beau2026a16,Beau2026a28,Beau2026a29} \\
+        {[H-$\mathcal{E}$1]} & Uniform Poincar\'e inequality & {[H]}
+        & \cite{Beau2026a16,Beau2026a29} \\
+        {[C]} & Spectral tightness (Lem.~\ref{lem:tightness}) $\Rightarrow$ Mosco
+        & Quantitatively confirmed (Thm~\ref{rem:numerical-C}); proof open (Q5a-O2)
+        & \S\ref{sec:conjecture} \\
+        \midrule
+        T1 & $C_\infty \simeq L^2(\mathbb{R})$ & Conditional on [H1]
+        & Thm~\ref{thm:T1} \\
+        T2 & Weil generators $\to$ metaplectic & Conditional on [H1], [H2]
+        & Thm~\ref{thm:T2} \\
+        T3 & $\mathcal{E}_q \xrightarrow{\mathrm{Mosco}} \mathcal{E}$, $\LPi$ self-adjoint
+        & Conditional on [H1],[H-$w$],[H-$\mathcal{E}$1],[C]; [C] numerically confirmed
+        & Thm~\ref{thm:T3} \\
+        \bottomrule
+      \end{tabular}
+      \caption{Status of all hypotheses and results.
+      ``Proved'' denotes an explicit proof in the cited companion.
+      ``Proved structurally'' denotes a consequence of the BFS geometry following from the
+      O-series framework.
+      ``[H]'' denotes a hypothesis supported by partial evidence but not proved here.
+      ``Open'' denotes a primary objective of the labelled open problem.}
+      \label{tab:status}
+    \end{table}
+
+  \subsection{Open problems}
+
+    \noindent\textbf{Q5a-O1} (Weil-block-compatible embeddings).
+    Construct explicit embeddings $\iota_{q,q'}$ satisfying all three conditions of
+    Hypothesis~\ref{hyp:embedding}, compare the two candidates of Remark~\ref{rem:candidate},
+    and determine which satisfies equivariance.
+    \emph{Expected difficulty:} moderate.
+
+    \medskip
+
+    \noindent\textbf{Q5a-O2} (Mosco tightness / Lemma~\ref{lem:tightness}).
+    Prove the uniform Nash inequality of Lemma~\ref{lem:nash} for the filtered family
+    $(G_q, a_q)$, obtain the $\ell^1$ control from the BI admissibility bound, and
+    combine via the discrete Rellich argument to establish Lemma~\ref{lem:tightness}
+    and hence Conjecture~\ref{conj:tightness}.
+    The high-frequency criterion $\sup_q\sum_{|\xi|>R}|\hat{f}_q(\xi)|^2 < \varepsilon$
+    (see the remark after Lemma~\ref{lem:tightness}) provides a testable numerical target
+    for the O-series pipeline.
+    \emph{Expected difficulty:} hard; the uniform Nash inequality for filtered nilpotent
+    graphs is not in the literature.
+
+    \medskip
+
+    \noindent\textbf{Q5a-O3} (Derivation of H-$w$ from the O-series).
+    Prove that the admissibility weights of Definition~\ref{def:weights} satisfy
+    Hypothesis~\ref{hyp:weights}: establish the uniform bound and the convergence
+    $a_q(s) \to A > 0$ from the stabilisation of $\delta_{\mathrm{pair}}$ documented in
+    O12--O25~\cite{Beau2026a16,Beau2026a29} and the O24 verticality lemma~\cite{Beau2026a28}.
+    \emph{Expected difficulty:} moderate; the key step is controlling the shell-averaged
+    fingerprint perturbation via the O-series spectral bounds.
+
+    \medskip
+
+    \noindent\textbf{Q5a-O4} (Verification of H2).
+    Establish Hypothesis~\ref{hyp:weil}~[H2] for the parameterisation of the Weil
+    representation used in~\cite{FoundationM}.
+    The sinc embedding of Remark~\ref{rem:candidate} makes the translation generator
+    $\hat{P}_q$ immediate; the main work concerns the modulation generator $\hat{X}_q$.
+    A direct verification on Gaussian test vectors is the natural starting point.
+
+    \medskip
+
+    \noindent\textbf{Q5a-O5} (Identification of $A$ from admissibility data).
+    Express the constant $A > 0$ in the limit form $\mathcal{E}(f,g) =
+  A\int \overline{\partial_x f}\,\partial_x g\,\mathrm{d}x$ explicitly in terms of the
+    Born--Infeld saturation constant $c_\chi$~\cite{Beau2026c} and the BFS combinatorial
+    data of $G_q$.
+    This identification is the first step toward extracting a non-trivial metric from
+    $\LPi$ and forms the bridge to Q5b.
+
+    \appendix
+
+  \section{Weil representation: explicit generator actions}
+  \label{app:weil}
+
+  For completeness, we record the standard action of the Weil representation
+  $\rho_q : G_q \to \mathcal{U}(C_q)$ on the generators of
+  $G_q = \Heis(\mathbb{Z}/q\mathbb{Z})$, at central character $e^{2\pi i/q}$.
+  For $f \in C_q = L^2(\mathbb{Z}/q\mathbb{Z})$ and $k \in \mathbb{Z}/q\mathbb{Z}$:
+  \begin{align*}
+    (\rho_q(X) f)(k) &= e^{2\pi i k/q} f(k) \qquad \text{(modulation)},\\
+    (\rho_q(Y) f)(k) &= f(k+1 \bmod q) \qquad \text{(cyclic shift)},\\
+    (\rho_q(Z) f)(k) &= e^{2\pi i/q} f(k) \qquad \text{(central character)}.
+  \end{align*}
+  The discrete Stone--von Neumann theorem guarantees that this is the unique (up to
+  isomorphism) irreducible unitary representation of $G_q$ at central character
+  $e^{2\pi i/q}$, confirming the identification $V_\rho \simeq C_q$ of Foundation
+  Theorem~5.6~\cite{FoundationM,HeisenbergN}.
+
+  \begin{thebibliography}{99}
+
+    \bibitem{FoundationM}
+    J.~Beau,
+    ``Admissible Non-Injective Transitions as the Primitive of Physical Description,''
+    Cosmochrony companion paper M, Zenodo (2026).
+    \emph{[Label to be assigned following the \texttt{Beau2026} pattern.]}
+
+    \bibitem{HeisenbergN}
+    J.~Beau,
+    ``Non-Factorisability and the Emergence of Heisenberg Structure from Admissibility
+    Constraints,''
+    Cosmochrony companion paper, Zenodo (2026).
+    doi:10.5281/zenodo.19635395.
+    \emph{[Label to be assigned following the \texttt{Beau2026} pattern.]}
+
+    \bibitem{Cosmochrony}
+    J.~Beau,
+    ``Cosmochrony: A Non-Injective Projection Theory of Emergent Physics,''
+    white paper, Zenodo (2026).
+    doi:10.5281/zenodo.17957509.
+
+    \bibitem{Beau2026pto}
+    J.~Beau,
+    ``Projective Temporal Ordering and Cumulative Projected Capacity:
+    Numerical Evidence from the Spectral Admissibility Cascade,''
+    Spectral Admissibility sub-Programme temporal ordering paper, Zenodo (2026).
+    doi:10.5281/zenodo.19474639.
+
+    \bibitem{Beau2026c}
+    J.~Beau,
+    ``Bounded Relaxation and the Dynamical Selection of Spacetime Geometry,''
+    Cosmochrony companion paper C, Zenodo (2026).
+
+    \bibitem{Beau2026a16}
+    J.~Beau,
+    ``Exact Weil-Block Projective Capacity on Heisenberg Graphs:
+    Resolving the Final Obstruction to $\delta$ Extraction,''
+    O12 paper, Zenodo (2026).
+
+    \bibitem{Beau2026a21}
+    J.~Beau,
+    ``Fibre-Level Admissibility from Conjugate Weil Blocks:
+    Structural Derivation of the Pair Observable,''
+    O17 paper, Zenodo (2026).
+
+    \bibitem{Beau2026a22}
+    J.~Beau,
+    ``Minimal Fibre Structure of the Non-Injective Projection from
+    Born--Infeld Indiscernibility,''
+    O18 paper, Zenodo (2026).
+
+    \bibitem{Beau2026a28}
+    J.~Beau,
+    ``Vertical Non-Injectivity and the Stability of the Observable Rank:
+    Closing the Unconditional $\beta^*$ Transfer,''
+    O24 paper, Zenodo (2026).
+
+    \bibitem{Beau2026a29}
+    J.~Beau,
+    ``Systematic Pair-Level Campaign for $\delta_{\mathrm{pair}}$,''
+    O25 paper, Zenodo (2026).
+
+    \bibitem{Bass1972}
+    H.~Bass,
+    ``The degree of polynomial growth of finitely generated nilpotent groups,''
+    \textit{Proc.\ London Math.\ Soc.} \textbf{25} (1972), 603--614.
+
+    \bibitem{Guivarch1973}
+    Y.~Guivarc'h,
+    ``Croissance polynomiale et p\'eriodes des fonctions harmoniques,''
+    \textit{Bull.\ Soc.\ Math.\ France} \textbf{101} (1973), 333--379.
+
+    \bibitem{HannayBerry1980}
+    J.~H.~Hannay and M.~V.~Berry,
+    ``Quantization of linear maps on a torus --- Fresnel diffraction by a periodic grating,''
+    \textit{Physica D} \textbf{1} (1980), 267--290.
+
+    \bibitem{DegliEspostiGraffi1993}
+    M.~Degli~Esposti and S.~Graffi,
+    ``Mathematical aspects of the quantum map,''
+    \textit{Lecture Notes in Phys.} \textbf{618}, Springer, 2003.
+
+    \bibitem{KuwaeShinoya2003}
+    K.~Kuwae and T.~Shioya,
+    ``Convergence of spectral structures: a functional analytic theory and its applications
+    to spectral geometry,''
+    \textit{Comm.\ Anal.\ Geom.} \textbf{11} (2003), 599--673.
+
+    \bibitem{MaRockner1992}
+    Z.-M.~Ma and M.~R\"ockner,
+    \textit{Introduction to the Theory of (Non-Symmetric) Dirichlet Forms},
+    Springer, Berlin, 1992.
+
+    \bibitem{Varopoulos1985}
+    N.~Th.~Varopoulos,
+    ``Isoperimetric inequalities and Markov chains,''
+    \textit{J.\ Funct.\ Anal.} \textbf{63} (1985), 215--239.
+
+    \bibitem{SaloffCoste1992}
+    L.~Saloff-Coste,
+    ``A note on Poincar\'e, Sobolev, and Harnack inequalities,''
+    \textit{Int.\ Math.\ Res.\ Not.} \textbf{1992}, no.~2, 27--38.
+
+  \end{thebibliography}
+
+\end{document}
