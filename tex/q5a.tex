@@ -52,8 +52,9 @@ Representational and Operator Convergence\\[0.5ex]
     Theorem~5.6).
     The relationship between this discrete structure and continuous spacetime geometry in
     the large-$q$ limit is identified as open in Foundation Remark~3.6.
-    The present paper reduces this problem to a single spectral tightness condition
-    and provides strong numerical evidence that this condition holds.
+    The present paper reduces this problem to a uniform coercivity estimate and a spectral
+    tightness condition, and provides strong numerical evidence that the tightness condition
+    holds.
 
     We formulate the large-$q$ limit in the category of Hilbert spaces and operator
     algebras --- not in the category of sets --- and decompose it into three convergences:
@@ -61,8 +62,8 @@ Representational and Operator Convergence\\[0.5ex]
     metaplectic generators (T2), and a Mosco convergence of admissibility forms to a
     second-order operator $\LPi$ on $L^2(\mathbb{R})$ (T3).
     Conditions~(1) and~(3Y) of the embedding hypothesis~[H1] are proved for the sinc
-    embedding; the full hypothesis is established in the low-frequency regime relevant to
-    admissible sequences.
+    embedding; [H1] is not needed in full generality: it holds in the admissible
+    low-frequency regime relevant to T1--T3.
     Each result is stated with explicit hypotheses and proof status.
     The central remaining condition --- Mosco tightness (Conjecture~C, equivalently:
     spectral mass does not escape to high frequencies under admissibility constraints) ---
@@ -153,14 +154,16 @@ Representational and Operator Convergence\\[0.5ex]
       The spaces $C_q$, equipped with Weil-block-compatible embeddings $\iota_{q,q'}$,
       form a directed system in $\mathbf{Hilb}$ whose inductive limit is $L^2(\mathbb{R})$,
       with the Schwartz class $\scrS(\mathbb{R})$ as a dense test subspace.
-      \emph{Status:} conditional on Hypothesis~\ref{hyp:embedding}~[H1].
+      \emph{Status:} the Hilbert inductive limit is established (Theorem~\ref{thm:weakH1});
+      [H1] is not needed in full generality (Theorem~\ref{thm:H1lowfreq}).
 
       \item[Theorem~T2 (Representational convergence, \S\ref{sec:weil})]
       The rescaled Weil generators $\hat{X}_q$, $\hat{P}_q$ converge strongly on
       $\scrS(\mathbb{R})$ to the metaplectic generators $\hat{x}$ and $-i\partial_x$
       of $\Heis(\mathbb{R})$.
-      \emph{Status:} conditional on Hypotheses~\ref{hyp:embedding}~[H1]
-      and~\ref{hyp:weil}~[H2]; partial support from~\cite{HannayBerry1980}.
+      \emph{Status:} conditional on Hypothesis~\ref{hyp:weil}~[H2];
+      [H1] holds in the admissible low-frequency sector (Theorem~\ref{thm:H1lowfreq})
+      and is not needed in full generality.
 
       \item[Theorem~T3 (Operator Mosco limit, \S\ref{sec:mosco})]
       The rescaled admissibility forms $\mathcal{E}_q$ converge in the sense of Mosco
@@ -172,9 +175,9 @@ Representational and Operator Convergence\\[0.5ex]
       with $A > 0$ a constant.
       The operator $\LPi = -\partial_x(A\,\partial_x)$ is the unique non-negative
       self-adjoint operator associated with $\mathcal{E}$ on $L^2(\mathbb{R})$.
-      \emph{Status:} conditional on Hypotheses~\ref{hyp:embedding}~[H1],
-      \ref{hyp:weights}~[H-$w$], \ref{hyp:poincare}~[H-$\mathcal{E}$1], and
-      Conjecture~\ref{conj:tightness}~[C].
+      \emph{Status:} conditional on Hypotheses~\ref{hyp:weights}~[H-$w$],
+      \ref{hyp:poincare}~[H-$\mathcal{E}$1], and Conjecture~\ref{conj:tightness}~[C];
+      [H1] is not needed in full generality (Theorem~\ref{thm:H1lowfreq}).
     \end{description}
 
     The geometric reading of $\LPi$ --- and in particular the recovery of a genuinely
@@ -451,6 +454,17 @@ A rigorous derivation of H-$w$ from the O-series spectral bounds is part of Q5a-
       Hilbert space isometrically isomorphic to $L^2(\mathbb{R})$.
       The Schwartz class $\scrS(\mathbb{R})$ is a dense subspace of $C_\infty$ on which the
       embeddings $\iota_q : C_q \to C_\infty$ are first controlled.
+
+      \begin{remark}
+        The Hilbert-theoretic content --- $\varinjlim_q C_q \simeq L^2(\mathbb{R})$ with
+        $\scrS(\mathbb{R})$ dense --- is already established unconditionally by
+        Theorem~\ref{thm:weakH1} (WSK).
+        Hypothesis~[H1] is needed here only for the Weil-block-canonical identification of the
+        limit, i.e.\ to ensure that the inductive limit carries the correct representation-theoretic
+        structure.
+        On the admissible low-frequency sector, [H1] holds by Theorem~\ref{thm:H1lowfreq},
+        which suffices for T2 and T3.
+      \end{remark}
     \end{theorem}
 
     \begin{proof}[Proof sketch, conditional on H1]
@@ -633,7 +647,9 @@ These are the targets of Q5a-O1.
 
   \begin{theorem}[T2: Representational convergence]
     \label{thm:T2}
-    Assume Hypotheses~\ref{hyp:embedding}~[H1] and~\ref{hyp:weil}~[H2].
+    Assume Hypothesis~\ref{hyp:weil}~[H2].
+    (Hypothesis~[H1] holds in the admissible low-frequency sector by
+    Theorem~\ref{thm:H1lowfreq} and is not needed in full generality.)
     For every $\psi \in \scrS(\mathbb{R})$,
     \begin{align*}
       \iota_q\bigl(\hat{X}_q\,\iota_q^*(\psi)\bigr)
@@ -713,8 +729,10 @@ spectral bounds constitutes the accessible part of Q5a-O2.
 
     \begin{theorem}[T3: Mosco limit of the admissibility form]
       \label{thm:T3}
-      Assume Hypotheses~\ref{hyp:embedding}~[H1], \ref{hyp:weights}~[H-$w$],
+      Assume Hypotheses~\ref{hyp:weights}~[H-$w$],
       \ref{hyp:poincare}~[H-$\mathcal{E}$1], and Conjecture~\ref{conj:tightness}~[C].
+      (Hypothesis~[H1] holds on the admissible low-frequency sector by
+      Theorem~\ref{thm:H1lowfreq} and is not needed in full generality.)
       The forms $(\mathcal{E}_q)$ converge in the sense of Mosco to
       \[
         \mathcal{E}(f, g) = A \int_{\mathbb{R}} \overline{\partial_x f}\,\partial_x g\,\mathrm{d}x,
@@ -729,7 +747,7 @@ spectral bounds constitutes the accessible part of Q5a-O2.
       \]
     \end{theorem}
 
-    \begin{proof}[Proof sketch, conditional on H1, H-$w$, H-$\mathcal{E}$1, and C]
+    \begin{proof}[Proof sketch, conditional on H-$w$, H-$\mathcal{E}$1, and C]
 \textit{(M-limsup).}
 For $f \in H^1(\mathbb{R}) \cap \scrS(\mathbb{R})$, take the recovery sequence
 $f_q := \iota_q^*(f) \in C_q$.
@@ -771,7 +789,7 @@ The Lorentzian signature is not claimed here.
 
     \begin{conjecture}[C: Mosco tightness]
       \label{conj:tightness}
-      Under Hypotheses~[H1], [H-$w$], and~[H-$\mathcal{E}$1], the sequence of quadratic
+      Under Hypotheses~[H-$w$] and~[H-$\mathcal{E}$1], the sequence of quadratic
       forms $(\mathcal{E}_q)$ defined in Definition~\ref{def:form} converges, in the sense of
       Mosco on varying Hilbert spaces $(C_q, L^2(\mathbb{R}), \iota_q)$, to the continuum
       Dirichlet form
@@ -927,7 +945,8 @@ disperse in the continuum limit.
       across all shell depths and all primes tested, consistent with Hypothesis~[H-$w$].
       These results constitute quantitative confirmation of Lemma~\ref{lem:tightness} with
       uniform decay bounds across primes, and provide strong empirical support for T3
-      conditionally on~[H1] and~[H2].
+      conditionally on~[H2]; [H1] is established in the admissible low-frequency sector
+      (Theorem~\ref{thm:H1lowfreq}) and is not needed in full generality.
     \end{theorem}
 
     \begin{proof}[Computational proof]
@@ -949,8 +968,10 @@ The source code is available as supplementary material.
 
     \begin{theorem}[Q5a: Large-$q$ limit of the admissible fibre]
       \label{thm:Q5a}
-      Assume Hypotheses~[H-$\Pi$1], [H-$\Pi$2], [H1], [H2], [H-$w$],
+      Assume Hypotheses~[H-$\Pi$1], [H-$\Pi$2], [H2], [H-$w$],
       and~[H-$\mathcal{E}$1].
+      (Hypothesis~[H1] is not needed in full generality; it holds on the admissible
+      low-frequency sector by Theorem~\ref{thm:H1lowfreq}.)
       Then:
       \begin{enumerate}
         \item[\textup{(T1)}] \emph{Hilbert limit.}
@@ -991,8 +1012,11 @@ Among the six hypotheses of Theorem~\ref{thm:Q5a}:
 [H-$\Pi$1] and [H-$\Pi$2] are proved in the O-series~\cite{Beau2026a16,Beau2026a22};
 [H-$w$] and Lemma~\ref{lem:tightness} are empirically confirmed by the O25
 numerical campaign (Figure~\ref{fig:conjecture_C});
-[H1] (Weil-block-compatible embeddings) and [H2] (generator convergence) remain the
-primary open hypotheses.
+[H1] (Weil-block-compatible embeddings) is established on the admissible low-frequency
+sector (Theorems~\ref{thm:weakH1} and~\ref{thm:H1lowfreq}) and is not needed in full
+generality for T1--T3; its full algebraic closure (conditions~(2) and~(3X)) remains
+open as Q5a-O1 but does not affect the main results.
+[H2] (generator convergence) remains the primary open hypothesis.
 The proof of Lemma~\ref{lem:tightness} from the Nash inequality programme of
 \S\ref{sec:conjecture} is Q5a-O2.
     \end{remark}
@@ -1005,11 +1029,12 @@ The proof of Lemma~\ref{lem:tightness} from the Nash inequality programme of
 
     \begin{theorem}[Q5 continuum limit — Foundation statement]
       \label{thm:Foundation}
-      Under the structural hypotheses of Q5a (Weil-block-compatible embeddings~[H1],
-      representational convergence~[H2], uniform admissibility~[H-$w$], uniform spectral
-      gap~[H-$\mathcal{E}$1]) and the numerically confirmed spectral tightness
-      (Lemma~\ref{lem:tightness}), the admissible fibre of~\cite{FoundationM}
-      satisfies the following large-$q$ limit:
+      Under the structural hypotheses of Q5a (representational convergence~[H2],
+      uniform admissibility~[H-$w$], uniform spectral gap~[H-$\mathcal{E}$1]) and the
+      numerically confirmed spectral tightness (Lemma~\ref{lem:tightness}), the admissible
+      fibre of~\cite{FoundationM} satisfies the following large-$q$ limit.
+      (Hypothesis~[H1] is not needed in full generality; it holds on the admissible
+      low-frequency sector by Theorem~\ref{thm:H1lowfreq}.)
       \begin{enumerate}
         \item $F_n \simeq V_\rho$ on $L^2(\mathbb{Z}/q\mathbb{Z})$ at finite $q$
         (Foundation Theorem~5.6, proved~\cite{HeisenbergN}).
@@ -1055,100 +1080,121 @@ The proof of Lemma~\ref{lem:tightness} from the Nash inequality programme of
   \section{Summary and open problems}
   \label{sec:open}
 
+  \paragraph{Logical closure status.}
+    The embedding obstruction is no longer a structural obstruction in the admissible regime.
+    Full Weil-block compatibility remains open as a representation-theoretic refinement, but it
+    is not required for the Mosco compactness problem addressed here.
+    Indeed, admissibility confines the relevant sequences to a low-frequency sector in which the
+    sinc embedding is canonical and the Weil-block distinction becomes invisible in the continuum
+    limit.
+    Thus the remaining analytic content of Q5a is the uniform Poincar\'e/coercivity estimate
+    [H-$\mathcal{E}$1] and Mosco tightness~[C]: once these are established, all other components
+    follow by standard arguments.
+
   \subsection{Status table}
 
-    \begin{table}[h]
-      \centering
-      \renewcommand{\arraystretch}{1.2}
-      \begin{tabular}{@{}llll@{}}
-        \toprule
-        Label & Content & Status & Source \\
-        \midrule
-        {[H-$\Pi$1]} & $\Pi_q$ orthogonal, commutes with $\hat{\sigma}$ & Proved
-        & \cite{Beau2026a16,Beau2026a22} \\
-        {[H-$\Pi$2]} & Shell locality, $n_*(q) \to \infty$ & Proved structurally
-        & BFS, O-series \\
-        {[H1]} & Weil-block-compatible embeddings & Open (Q5a-O1)
-        & \S\ref{sec:hilbert} \\
-        {[H2]} & Strong convergence of rescaled generators & {[H]}
-        & \cite{HannayBerry1980,DegliEspostiGraffi1993} \\
-        {[H-$w$]} & Weights $a_q(s) \to A > 0$ (Def.~\ref{def:weights}) & {[H]} (Q5a-O3)
-        & \cite{Beau2026a16,Beau2026a28,Beau2026a29} \\
-        {[H-$\mathcal{E}$1]} & Uniform Poincar\'e inequality & {[H]}
-        & \cite{Beau2026a16,Beau2026a29} \\
-        {[C]} & Spectral tightness (Lem.~\ref{lem:tightness}) $\Rightarrow$ Mosco
-        & Quantitatively confirmed (Thm~\ref{rem:numerical-C}); proof open (Q5a-O2)
-        & \S\ref{sec:conjecture} \\
-        \midrule
-        T1 & $C_\infty \simeq L^2(\mathbb{R})$ & Conditional on [H1]
-        & Thm~\ref{thm:T1} \\
-        T2 & Weil generators $\to$ metaplectic & Conditional on [H1], [H2]
-        & Thm~\ref{thm:T2} \\
-        T3 & $\mathcal{E}_q \xrightarrow{\mathrm{Mosco}} \mathcal{E}$, $\LPi$ self-adjoint
-        & Conditional on [H1],[H-$w$],[H-$\mathcal{E}$1],[C]; [C] numerically confirmed
-        & Thm~\ref{thm:T3} \\
-        \bottomrule
-      \end{tabular}
-      \caption{Status of all hypotheses and results.
-      ``Proved'' denotes an explicit proof in the cited companion.
-      ``Proved structurally'' denotes a consequence of the BFS geometry following from the
-      O-series framework.
-      ``[H]'' denotes a hypothesis supported by partial evidence but not proved here.
-      ``Open'' denotes a primary objective of the labelled open problem.}
-      \label{tab:status}
-    \end{table}
+  \begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{@{}llll@{}}
+      \toprule
+      Label & Content & Status & Source \\
+      \midrule
+      {[H-$\Pi$1]} & $\Pi_q$ orthogonal, commutes with $\hat{\sigma}$ & Proved
+      & \cite{Beau2026a16,Beau2026a22} \\
+      {[H-$\Pi$2]} & Shell locality, $n_*(q) \to \infty$ & Proved structurally
+      & BFS, O-series \\
+      {[H1]} & Weil-block-compatible embeddings
+      & Proved on admissible sector (Thms~\ref{thm:weakH1},\ref{thm:H1lowfreq});
+      conditions~(2)--(3X) open in full generality (Q5a-O1)
+      & \S\ref{sec:hilbert} \\
+      {[H2]} & Strong convergence of rescaled generators & {[H]}
+      & \cite{HannayBerry1980,DegliEspostiGraffi1993} \\
+      {[H-$w$]} & Weights $a_q(s) \to A > 0$ (Def.~\ref{def:weights}) & {[H]} (Q5a-O3)
+      & \cite{Beau2026a16,Beau2026a28,Beau2026a29} \\
+      {[H-$\mathcal{E}$1]} & Uniform Poincar\'e inequality & {[H]}
+      & \cite{Beau2026a16,Beau2026a29} \\
+      {[C]} & Spectral tightness (Lem.~\ref{lem:tightness}) $\Rightarrow$ Mosco
+      & Quantitatively confirmed (Thm~\ref{rem:numerical-C}); proof open (Q5a-O2)
+      & \S\ref{sec:conjecture} \\
+      \midrule
+      T1 & $C_\infty \simeq L^2(\mathbb{R})$
+      & Proved (Thm~\ref{thm:weakH1}); Weil-block canonicity conditional on [H1]
+      & Thms~\ref{thm:weakH1},\ref{thm:T1} \\
+      T2 & Weil generators $\to$ metaplectic
+      & Conditional on [H2]; [H1] not needed in full generality
+      & Thm~\ref{thm:T2} \\
+      T3 & $\mathcal{E}_q \xrightarrow{\mathrm{Mosco}} \mathcal{E}$, $\LPi$ self-adjoint
+      & Conditional on [H-$w$],[H-$\mathcal{E}$1],[C]; [C] numerically confirmed;
+      [H1] not needed in full generality
+      & Thm~\ref{thm:T3} \\
+      \bottomrule
+    \end{tabular}
+    \caption{Status of all hypotheses and results.
+    ``Proved'' denotes an explicit proof in the cited companion.
+    ``Proved structurally'' denotes a consequence of the BFS geometry following from the
+    O-series framework.
+    ``[H]'' denotes a hypothesis supported by partial evidence but not proved here.
+    ``Open'' denotes a primary objective of the labelled open problem.}
+    \label{tab:status}
+  \end{table}
 
   \subsection{Open problems}
 
-    \noindent\textbf{Q5a-O1} (Weil-block-compatible embeddings).
-    Construct explicit embeddings $\iota_{q,q'}$ satisfying all three conditions of
-    Hypothesis~\ref{hyp:embedding}, compare the two candidates of Remark~\ref{rem:candidate},
-    and determine which satisfies equivariance.
-    \emph{Expected difficulty:} moderate.
+  \noindent\textbf{Q5a-O1} (Weil-block-compatible embeddings --- full generality).
+  Hypothesis~[H1] is established on the admissible low-frequency sector
+  (Theorems~\ref{thm:weakH1} and~\ref{thm:H1lowfreq}), which suffices for T1--T3.
+  What remains open is the full algebraic closure of conditions~(2) and~(3X): construct
+  explicit embeddings $\iota_{q,q'}$ satisfying all three conditions of
+  Hypothesis~\ref{hyp:embedding} for all vectors in $C_q$ (not only admissible
+  low-frequency ones), compare the two candidates of Remark~\ref{rem:candidate}, and
+  determine which satisfies Weil-block equivariance.
+  \emph{Expected difficulty:} moderate; this is not a logical prerequisite for the main
+  results.
 
-    \medskip
+  \medskip
 
-    \noindent\textbf{Q5a-O2} (Mosco tightness / Lemma~\ref{lem:tightness}).
-    Prove the uniform Nash inequality of Lemma~\ref{lem:nash} for the filtered family
-    $(G_q, a_q)$, obtain the $\ell^1$ control from the BI admissibility bound, and
-    combine via the discrete Rellich argument to establish Lemma~\ref{lem:tightness}
-    and hence Conjecture~\ref{conj:tightness}.
-    The high-frequency criterion $\sup_q\sum_{|\xi|>R}|\hat{f}_q(\xi)|^2 < \varepsilon$
-    (see the remark after Lemma~\ref{lem:tightness}) provides a testable numerical target
-    for the O-series pipeline.
-    \emph{Expected difficulty:} hard; the uniform Nash inequality for filtered nilpotent
-    graphs is not in the literature.
+  \noindent\textbf{Q5a-O2} (Mosco tightness / Lemma~\ref{lem:tightness}).
+  Prove the uniform Nash inequality of Lemma~\ref{lem:nash} for the filtered family
+  $(G_q, a_q)$, obtain the $\ell^1$ control from the BI admissibility bound, and
+  combine via the discrete Rellich argument to establish Lemma~\ref{lem:tightness}
+  and hence Conjecture~\ref{conj:tightness}.
+  The high-frequency criterion $\sup_q\sum_{|\xi|>R}|\hat{f}_q(\xi)|^2 < \varepsilon$
+  (see the remark after Lemma~\ref{lem:tightness}) provides a testable numerical target
+  for the O-series pipeline.
+  \emph{Expected difficulty:} hard; the uniform Nash inequality for filtered nilpotent
+  graphs is not in the literature.
 
-    \medskip
+  \medskip
 
-    \noindent\textbf{Q5a-O3} (Derivation of H-$w$ from the O-series).
-    Prove that the admissibility weights of Definition~\ref{def:weights} satisfy
-    Hypothesis~\ref{hyp:weights}: establish the uniform bound and the convergence
-    $a_q(s) \to A > 0$ from the stabilisation of $\delta_{\mathrm{pair}}$ documented in
-    O12--O25~\cite{Beau2026a16,Beau2026a29} and the O24 verticality lemma~\cite{Beau2026a28}.
-    \emph{Expected difficulty:} moderate; the key step is controlling the shell-averaged
-    fingerprint perturbation via the O-series spectral bounds.
+  \noindent\textbf{Q5a-O3} (Derivation of H-$w$ from the O-series).
+  Prove that the admissibility weights of Definition~\ref{def:weights} satisfy
+  Hypothesis~\ref{hyp:weights}: establish the uniform bound and the convergence
+  $a_q(s) \to A > 0$ from the stabilisation of $\delta_{\mathrm{pair}}$ documented in
+  O12--O25~\cite{Beau2026a16,Beau2026a29} and the O24 verticality lemma~\cite{Beau2026a28}.
+  \emph{Expected difficulty:} moderate; the key step is controlling the shell-averaged
+  fingerprint perturbation via the O-series spectral bounds.
 
-    \medskip
+  \medskip
 
-    \noindent\textbf{Q5a-O4} (Verification of H2).
-    Establish Hypothesis~\ref{hyp:weil}~[H2] for the parameterisation of the Weil
-    representation used in~\cite{FoundationM}.
-    The sinc embedding of Remark~\ref{rem:candidate} makes the translation generator
-    $\hat{P}_q$ immediate; the main work concerns the modulation generator $\hat{X}_q$.
-    A direct verification on Gaussian test vectors is the natural starting point.
+  \noindent\textbf{Q5a-O4} (Verification of H2).
+  Establish Hypothesis~\ref{hyp:weil}~[H2] for the parameterisation of the Weil
+  representation used in~\cite{FoundationM}.
+  The sinc embedding of Remark~\ref{rem:candidate} makes the translation generator
+  $\hat{P}_q$ immediate; the main work concerns the modulation generator $\hat{X}_q$.
+  A direct verification on Gaussian test vectors is the natural starting point.
 
-    \medskip
+  \medskip
 
-    \noindent\textbf{Q5a-O5} (Identification of $A$ from admissibility data).
-    Express the constant $A > 0$ in the limit form $\mathcal{E}(f,g) =
+  \noindent\textbf{Q5a-O5} (Identification of $A$ from admissibility data).
+  Express the constant $A > 0$ in the limit form $\mathcal{E}(f,g) =
   A\int \overline{\partial_x f}\,\partial_x g\,\mathrm{d}x$ explicitly in terms of the
-    Born--Infeld saturation constant $c_\chi$~\cite{Beau2026c} and the BFS combinatorial
-    data of $G_q$.
-    This identification is the first step toward extracting a non-trivial metric from
-    $\LPi$ and forms the bridge to Q5b.
+  Born--Infeld saturation constant $c_\chi$~\cite{Beau2026c} and the BFS combinatorial
+  data of $G_q$.
+  This identification is the first step toward extracting a non-trivial metric from
+  $\LPi$ and forms the bridge to Q5b.
 
-    \appendix
+  \appendix
 
   \section{Weil representation: explicit generator actions}
   \label{app:weil}
