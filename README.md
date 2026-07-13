@@ -1,6 +1,6 @@
 This repository contains the source of the **Q5a Cosmochrony paper**  
-[*Continuum Limit of the Fibre:
-Spectral Tightness, Dirichlet Forms, and the Discrete-to-Continuum Transition*](out/q5a.pdf).
+*Continuum Limit of the Fibre:
+Spectral Tightness, Dirichlet Forms, and the Discrete-to-Continuum Transition*.
 
 This work addresses the **Q5 problem** posed in the Foundation paper:
 
