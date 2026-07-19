@@ -43,7 +43,9 @@ possibility, tied to a future non-vanishing asymptotic bound on the critical cov
 
 The numerical statements (balanced-profile rejection at the measured primes) are produced by
 the deterministic script `code/canonical_sector_test.py` (published depths only, no
-recalibration).
+recalibration). Note: the script imports `spectral_O12.py` from the O25 repository
+(`admissibility/o25/code/` in the Cosmochrony workspace); reproducing it requires that
+repository alongside this one.
 
 ## Citation
 

@@ -73,8 +73,9 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
     while balanced (line-scale) profiles are rejected at all measured primes.
     Second, the published admissibility form converges to the zero form on this filtration, uniformly on
     norm-bounded sets, at rate $q^{-2}$.
-    Third, a normalisation no-go: if the modulation and translation weights both remain positive and of
-    order one --- as the pipeline data indicate --- then no common scalar normalisation of the form
+    Third, a normalisation no-go: if the saturation depth diverges and the modulation and translation
+    weights both remain positive and of order one --- as the pipeline data indicate --- then no common
+    scalar normalisation of the form
     produces a non-trivial finite toric differential operator: preserving the derivative sector makes
     the modulation sector diverge, and preserving the modulation sector eliminates the derivative.
     The only non-trivial rescaled limit is a conditional Dirichlet operator in the rescaled frequency
@@ -85,7 +86,7 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
     \textbf{Interpretive status.}
     The structural reading is that admissibility, as published, organises the fibre by frequency rather
     than by position: the emergent object is a growing Fourier window, not a discretised spatial line.
-    Whether a spatial continuum can emerge from this structure is exactly the reopened content of Q5.
+    Whether a spatial continuum can emerge from this structure is exactly the open content of Q5.
   \end{abstract}
 
   \paragraph{Keywords.}
@@ -130,18 +131,19 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
       With the published prefactor $q^{-2}$ and bounded weights, the admissibility form tends to zero
       uniformly on norm-bounded subsets of the filtration; its Mosco limit is the zero form.
 
-      \item[Normalisation no-go (Theorem~\ref{thm:nogo}; proved, conditional on the measured weight
-      behaviour).]
-      If the modulation and translation weights have positive finite limits, then for every common
+      \item[Normalisation no-go (Theorem~\ref{thm:nogo}; proved under [H-depth] and the measured
+      weight behaviour).]
+      If the depth diverges and the modulation and translation weights have positive finite limits,
+      then for every common
       scalar normalisation $\alpha_q$ the limit of the rescaled forms on fixed toric profiles is either
       the zero form, a bounded multiplication form with no derivative term, or the degenerate form
-      $+\infty$ off the constants.
+      $+\infty$ off zero.
       No common scalar normalisation yields a non-trivial toric differential operator.
 
       \item[Dual window limit (Proposition~\ref{prop:blowup}; conditional).]
-      Under the frequency blow-up $u = b/n_1(q)$, the rescaled form converges to a Dirichlet quadratic
-      form on $L^2([-1,1])$ in the rescaled \emph{frequency} variable, with a potential term controlled
-      by the critical coverage $x_1(q)$.
+      Under the blow-up of the frequency variable, $u = b/n_1(q)$, the rescaled form converges to
+      a Dirichlet quadratic form on $L^2([-1,1])$ in the rescaled \emph{frequency} variable, with
+      a potential term controlled by the critical coverage $x_1(q)$.
       This is a statement in the dual space; it does not produce a spatial continuum and does not
       resolve Q5.
     \end{description}
@@ -161,6 +163,12 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
     Fix a prime $q \ge 5$ and $\Gq = \Heis(\Z/q\Z)$ with generators $X, Y, Z$ (standard elementary
     matrices) and symmetric generating set $S_q = \{X^{\pm1}, Y^{\pm1}\}$; $B_n$ denotes the BFS ball
     of radius $n$ in the word metric.
+    Group elements are written in the coordinates $g = (a, b, \gamma)$ with
+    $g = X^{b} Y^{a} Z^{\gamma}$ in normal form, so that $X$ increments the $b$-coordinate and $Y$
+    the $a$-coordinate.
+    (The O-series pipeline code uses the opposite naming for the two non-central generators; the
+    weight limits $A_X, A_Y$ below always refer to the modulation and translation sectors as defined
+    here, and Hypothesis~[H-$w'$] is insensitive to the naming since both sectors are covered.)
     By the Bass--Guivarc'h theorem~\cite{Bass1972,Guivarch1973}, $|B_n| \sim \CHeis\, n^4$ with
     $\CHeis \approx 0.427$ for this generating set~\cite{Beau2026ccnote}.
 
@@ -188,7 +196,7 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
 
     The published saturation depth $n_1(q)$ is the auto-calibrated marginal-novelty stop of the
     O-series exploration, with values $n_1 = 4, 8, 11, 13, 14$ at $q = 29, 61, 101, 151, 211$ and the
-    exact reduction $n_1(q) = (x_1(q)/\CHeis)^{1/4}\sqrt{q}$ to the critical coverage
+    reduction $n_1(q) = (x_1(q)/\CHeis)^{1/4}\sqrt{q}\,(1 + o(1))$ to the critical coverage
     $x_1(q) = |B_{n_1}|/q^2$~\cite{Beau2026a32,Beau2026ccnote}.
 
     \begin{hypothesis}[H-depth: unbounded depth]
@@ -244,7 +252,7 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
       Hence $\Omega_n = \mathrm{span}\{e_b : b \in \beta(B_n)\}$ where $\beta(B_n)$ is the set of
       $b$-coordinates realised in $B_n$.
       Each generator changes the $b$-coordinate by at most one, so
-      $\beta(B_n) \subseteq \{-n, \ldots, n\}$; conversely $Y^{b} \in B_n$ for $|b| \le n$, so equality
+      $\beta(B_n) \subseteq \{-n, \ldots, n\}$; conversely $X^{b} \in B_n$ for $|b| \le n$, so equality
       holds.
       The modes $e_b$, $b$ ranging over distinct residues, are orthonormal, giving the dimension count.
     \end{proof}
@@ -252,26 +260,28 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
     \begin{remark}[Physical bandwidth of the canonical stage]
       \label{rem:bandwidth}
       In balanced units ($h = \sqrt{2\pi/q}$), the stage $\Omega_{n_1(q)}$ has physical bandwidth
-      $n_1(q)\,h = \sqrt{2\pi}\,(x_1(q)/\CHeis)^{1/4}$ exactly, by the reduction
+      $n_1(q)\,h = \sqrt{2\pi}\,(x_1(q)/\CHeis)^{1/4}\,(1 + o(1))$, by the reduction
       of~\cite{Beau2026ccnote}.
       The bandwidth is therefore governed by the critical coverage: it is bounded away from zero if and
       only if $x_1(q)$ is.
     \end{remark}
 
-    \begin{corollary}[Mode capture and balanced rejection]
+    \begin{corollary}[Mode capture]
       \label{cor:capture}
-      \textup{(i)} A fixed toric mode $e_m$ lies in $\Omega_{n_1(q)}$ if and only if
+      A fixed toric mode $e_m$ lies in $\Omega_{n_1(q)}$ if and only if
       $n_1(q) \ge |m|$; under Hypothesis~\textup{[H-depth]}, every fixed toric mode is captured
       permanently.
-      \textup{(ii)} At the measured primes, balanced (line-scale) Hermite profiles are rejected: their
-      relative distance to the stage is non-monotone in $q$ with a rising tail
-      (for the Gaussian profile, $0.051,\, 0.010,\, 0.007,\, 0.010,\, 0.020$ over
-      $q = 29, 61, 101, 151, 211$; for the sixth Hermite profile, flat at $0.75$--$0.74$), tracking the
-      non-monotone physical bandwidth of Remark~\ref{rem:bandwidth}.
     \end{corollary}
 
-    Part~(ii) is a reproducible numerical statement (script \texttt{code/canonical\_sector\_test.py},
-    deterministic, published depths only); its status is empirical, at the measured primes.
+    \paragraph{Numerical observation (balanced rejection; empirical, measured primes).}
+    At the measured primes, balanced (line-scale) Hermite profiles are rejected: their relative
+    distance to the stage is non-monotone in $q$ with a rising tail
+    (for the Gaussian profile, $0.051,\, 0.010,\, 0.007,\, 0.010,\, 0.020$ over
+    $q = 29, 61, 101, 151, 211$; for the sixth Hermite profile, non-monotone within
+    $0.66$--$0.75$ with endpoints $0.75 \to 0.74$), tracking the non-monotone physical bandwidth of
+    Remark~\ref{rem:bandwidth}.
+    This is a reproducible numerical statement (script \texttt{code/canonical\_sector\_test.py},
+    deterministic, published depths only), not a theorem.
     The structural mechanism is Remark~\ref{rem:bandwidth}: fixed toric modes require only depth, while
     balanced profiles require a bandwidth bounded away from zero, which the measured coverage decay
     contradicts.
@@ -337,9 +347,10 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
         \Eq(f) \;\le\; C\, q^{-2}\, \|f\|^2 \qquad \text{for all } f \in \Omega_{n_1(q)},
       \]
       with $C = 8 \sup_q \max_s a_q(s)$.
-      Consequently $\Eq \to 0$ uniformly on norm-bounded sets, and the Mosco limit of the published
-      forms, along any isometric identification of the stages with subspaces of a fixed Hilbert space,
-      is the zero form.
+      Consequently $\Eq \to 0$ uniformly on norm-bounded sets, and the Mosco
+      limit~\cite{KuwaeShioya2003} of the published forms, along any isometric identification of the
+      stages with subspaces of a fixed Hilbert space whose ranges have asymptotically dense union, is
+      the zero form.
     \end{theorem}
 
     \begin{proof}
@@ -369,21 +380,21 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
       + \bigl(a_q(Y) + a_q(Y^{-1})\bigr) \sum_b 4 \sin^2(\pi b/q)\, |\hat f_b|^2 ,
     \]
     with $c_X(f) = \sum_b |\Delta \hat f_b|^2 = \int_\T |e^{2\pi i x} - 1|^2\, |f(x)|^2\,\mathrm{d}x
-    > 0$ for non-constant $f$, and the $Y$-sum equal to
+    > 0$ for every non-zero $f$, and the $Y$-sum equal to
     $q^{-2}\bigl[(2\pi)^2 \sum_b b^2 |\hat f_b|^2\bigr](1 + o(1))$.
 
     \begin{theorem}[No common scalar normalisation yields a toric differential limit]
       \label{thm:nogo}
       Assume Hypotheses~\textup{[H-depth]} and~\textup{[H-$w'$]}.
       Let $\alpha_q > 0$ be any sequence of common scalar normalisations.
-      Then every subsequential limit of the rescaled forms $\alpha_q\,\mathcal{B}_q$ on smooth toric
-      targets is one of:
+      Then every subsequential limit of the rescaled forms $\alpha_q\,\mathcal{B}_q$ on toric targets
+      with finitely many Fourier modes is one of:
       \begin{enumerate}
         \item[\textup{(i)}] the zero form (when $\alpha_q \to 0$);
         \item[\textup{(ii)}] the bounded multiplication form
         $2\alpha_\ast A_X \int_\T 2\bigl(1 - \cos 2\pi x\bigr)\, |f|^2$ (when
         $\alpha_q \to \alpha_\ast \in (0, \infty)$), which contains no derivative term;
-        \item[\textup{(iii)}] the degenerate form equal to $+\infty$ on every non-constant target (when
+        \item[\textup{(iii)}] the degenerate form equal to $+\infty$ on every non-zero target (when
         $\alpha_q \to \infty$).
       \end{enumerate}
       In particular, no choice of $\alpha_q$ produces a limit containing both a finite derivative term
@@ -398,7 +409,7 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
       $\alpha_q\,\mathcal{B}_q(f_q) \to 0$ if $\alpha_q \to 0$ (both sectors bounded);
       $\to 2\alpha_\ast A_X\, c_X(f)$ if $\alpha_q \to \alpha_\ast$ (the $Y$-sector carries the factor
       $q^{-2}$);
-      $\to +\infty$ if $\alpha_q \to \infty$ and $c_X(f) \ne 0$, i.e.\ for every non-constant $f$.
+      $\to +\infty$ if $\alpha_q \to \infty$, since $c_X(f) > 0$ for every non-zero $f$.
       The multiplication identification in~(ii) is Parseval:
       $c_X(f) = \int_\T |e^{2\pi i x} - 1|^2\, |f|^2 = \int_\T 2(1 - \cos 2\pi x)\, |f|^2$.
     \end{proof}
@@ -443,7 +454,7 @@ Q5a of the Cosmochrony Spectral Geometry Programme}}
         \;+\;
         2 A_Y\, (2\pi)^2\, \lambda \int_{-1}^{1} u^2\, |\varphi(u)|^2\, \mathrm{d}u ,
       \]
-      along any subsequence on which $x_1(q)/\CHeis \to \lambda \in [0, \infty)$, using the exact
+      along any subsequence on which $x_1(q)/\CHeis \to \lambda \in [0, \infty)$, using the
       identity $(n_1^2/q)^2 = x_1/\CHeis\,(1 + o(1))$; envelopes with $\varphi(\pm 1) \neq 0$ are
       excluded in the limit (Dirichlet), by Lemma~\ref{lem:boundary}.
       Under the empirical coverage decay $\lambda = 0$ and the limit is the Dirichlet form of
