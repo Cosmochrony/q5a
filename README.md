@@ -5,7 +5,8 @@ This repository contains the source of the **Q5a Cosmochrony paper**
 What the Admissible Fibre Does and Does Not Converge To*.
 
 The paper addresses the **Q5 problem** posed in the Foundation paper — how the discrete
-admissible fibre \(F_n \simeq V_\rho \subset L^2(\mathbb{Z}/q\mathbb{Z})\) relates to
+admissible fibre, carrying the Heisenberg–Schrödinger representation \(\pi_c\) on a supplied
+carrier \(\mathcal{H}_c = L^2(\mathbb{Z}/q\mathbb{Z})\), relates to
 continuous structure in the large-\(q\) limit — and answers a sharper preliminary question:
 what does the canonical filtration actually converge to, under the published admissibility
 form and normalisation?
