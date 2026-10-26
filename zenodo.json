@@ -3,5 +3,6 @@
   "web_url": "https://cosmochrony.org/science/emergent-geometry/q5/a/",
   "main_tex": "tex/q5a.tex",
   "zenodo_id": 19642369,
-  "doi": "10.5281/zenodo.19642369"
+  "doi": "10.5281/zenodo.19642369",
+  "notes": "Version 3.3 corrects one attribution to the Foundation paper: the admissibility axioms do not force irreducibility. Under a representation-theoretic dictionary, A1 and A3 give irreducibility, and with it non-commutation, only under an additional sector reading of A3, not derived, on which a generator-stable decomposition of the fibre counts as premature selection (Foundation version 2.6, Lemma 5.6). No other statement is changed; the results of the paper are unchanged."
 }
